@@ -1,0 +1,49 @@
+.page-top {
+  padding-top: var(--gap, 20px);
+  padding-bottom: var(--gap, 20px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.social-menu {
+  flex-grow: 1;
+
+  display: flex;
+  align-items: center;
+}
+
+.page-title {
+  flex-grow: 1;
+  padding-left: var(--gap, 20px);
+  padding-right: var(--gap, 20px);
+
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1.2;
+
+  text-align: center;
+}
+
+.top-menu {
+  flex-grow: 1;
+}
+
+.page-banner {
+  position: relative;
+  height: 450px;
+
+  &__img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+}
