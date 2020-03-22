@@ -1,0 +1,43 @@
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .page-numbers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    border-radius: 2px;
+    font-weight: bold;
+    text-decoration: none;
+
+    background: var(--service-color);
+    transition: background-color $transitionDelay, color $transitionDelay;
+
+    &:hover {
+      background: black;
+      color: white;
+    }
+
+    &.prev, &.next {
+      &, &:hover {
+        background-color: transparent;
+        color: inherit;
+      }
+    }
+
+    &.current {
+      &, &:hover {
+        background-color: var(--service-dark-color);
+        color: inherit;
+      }
+    }
+
+    svg {
+      fill: var(--content-color);
+    }
+  }
+}

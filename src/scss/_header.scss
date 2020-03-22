@@ -16,13 +16,6 @@
 
 .page-title {
   flex-grow: 1;
-  padding-left: var(--gap, 20px);
-  padding-right: var(--gap, 20px);
-
-  font-size: 40px;
-  font-weight: 900;
-  line-height: 1.2;
-
   text-align: center;
 }
 
@@ -32,7 +25,6 @@
 
 .page-banner {
   position: relative;
-  height: 450px;
 
   &__img {
     position: absolute;
@@ -45,5 +37,13 @@
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+  }
+
+  &__content {
+    position: relative;
+    min-height: 450px;
+    background-color: hsla(var(--accent-color-hue), 30%, 28%, 0.7);
+    padding-top: 50px;
+    padding-bottom: 50px;
   }
 }

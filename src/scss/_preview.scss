@@ -1,0 +1,65 @@
+.post-preview {
+  transition: transform ease-in-out $transitionDelay * 2;
+
+  &.transformed {
+    transform: perspective(1000px) rotateY(-20deg);
+  }
+
+  &__img {
+    display: block;
+    position: relative;
+    padding-bottom: 50%;
+    margin-bottom: -20px;
+    overflow: hidden;
+
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform $transitionDelay * 2, filter $transitionDelay;
+      transform-origin: center;
+    }
+
+    &:hover {
+      img {
+        transform: scale(1.2);
+        filter: saturate(0.5);
+      }
+    }
+  }
+
+  &__content {
+    position: relative;
+  }
+
+  &__title {
+    background-color: var(--body-bg, white);
+    width: 85%;
+    position: relative;
+
+    &:before {
+      content: '';
+      height: 3px;
+      background-color: currentColor;
+      width: 40px;
+      transition: width $transitionDelay * 2;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  &__text {
+    background-color: var(--body-bg, white);
+  }
+
+  &:hover {
+    .post-preview__title {
+      &:before {
+        width: 100%;
+      }
+    }
+  }
+}

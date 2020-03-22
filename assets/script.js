@@ -8,6 +8,7 @@ function registerObserver(selector, entryCb, config = {}) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entryCb(entry.target);
+        entry.target.setAttribute('data-loaded', '');
         observer.unobserve(entry.target);
       }
     })
@@ -24,8 +25,19 @@ document.addEventListener('DOMContentLoaded', () => {
     target.removeAttribute('data-src');
   })
 
+  registerObserver('[data-srcset]', (target) => {
+    target.srcset = target.dataset.srcset;
+    target.removeAttribute('data-srcset');
+  })
+
   registerObserver('[data-background]', (target) => {
     target.style.backgroundImage = `url(${target.dataset.background})`;
     target.removeAttribute('data-background');
   })
+
+  registerObserver('.post-preview.transformed', (target) => {
+    target.classList.remove('transformed');
+  }, {
+    rootMargin: '-250px'
+  });
 })

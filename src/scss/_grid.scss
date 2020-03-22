@@ -14,8 +14,14 @@ $spaceRatio: (
   '4': 1.25,
   '5': 2,
   '6': 3.25,
-  '7': 5.25
+  '7': 5.25,
 );
+
+@mixin small-and-up {
+  @media screen and (min-width: $smallDevicesStart) {
+    @content;
+  }
+}
 
 @mixin medium-and-up {
   @media screen and (min-width: $mediumDevicesStart) {
@@ -57,17 +63,25 @@ $spaceRatio: (
 }
 
 .col {
-  margin-left: $gap / 2;
-  margin-right: $gap / 2;
+  padding-left: $gap / 2;
+  padding-right: $gap / 2;
 
-  @for $i from 1 to $columnsCount {
+  @for $i from 1 through $columnsCount {
     &-#{$i} {
       @include cols($i);
     }
   }
 
+  @include small-and-up {
+    @for $i from 1 through $columnsCount {
+      &-sm-#{$i} {
+        @include cols($i);
+      }
+    }
+  }
+
   @include medium-and-up {
-    @for $i from 1 to $columnsCount {
+    @for $i from 1 through $columnsCount {
       &-md-#{$i} {
         @include cols($i);
       }
@@ -75,7 +89,7 @@ $spaceRatio: (
   }
 
   @include large-and-up {
-    @for $i from 1 to $columnsCount {
+    @for $i from 1 through $columnsCount {
       &-lg-#{$i} {
         @include cols($i);
       }
@@ -83,7 +97,7 @@ $spaceRatio: (
   }
 
   @include extra-large-and-up {
-    @for $i from 1 to $columnsCount {
+    @for $i from 1 through $columnsCount {
       &-xl-#{$i} {
         @include cols($i);
       }
@@ -91,252 +105,76 @@ $spaceRatio: (
   }
 }
 
+@mixin mediaSpace($property, $prefix: '') {
+  @each $size, $ratio in $spaceRatio {
+    &#{$prefix}-#{$size},
+    &a#{$prefix}-#{$size} {
+      #{$property}: $ratio * $spaceUnit;
+    }
+    &t#{$prefix}-#{$size} {
+      #{$property}-top: $ratio * $spaceUnit;
+    }
+    &b#{$prefix}-#{$size} {
+      #{$property}-bottom: $ratio * $spaceUnit;
+    }
+    &y#{$prefix}-#{$size} {
+      #{$property}-top: $ratio * $spaceUnit;
+      #{$property}-bottom: $ratio * $spaceUnit;
+    }
+    &l#{$prefix}-#{$size} {
+      #{$property}-left: $ratio * $spaceUnit;
+    }
+    &r#{$prefix}-#{$size} {
+      #{$property}-right: $ratio * $spaceUnit;
+    }
+    &x#{$prefix}-#{$size} {
+      #{$property}-left: $ratio * $spaceUnit;
+      #{$property}-right: $ratio * $spaceUnit;
+    }
+    &#{$prefix}-0 {
+      #{$property}: 0;
+    }
+  }
+}
+
 /* margins */
 .m {
-  @each $size, $ratio in $spaceRatio {
-    &-#{$size}, &a-#{$size} {
-      margin: $ratio * $spaceUnit;
-    }
-    &t-#{$size} {
-      margin-top: $ratio * $spaceUnit;
-    }
-    &b-#{$size} {
-      margin-bottom: $ratio * $spaceUnit;
-    }
-    &y-#{$size} {
-      margin-top: $ratio * $spaceUnit;
-      margin-bottom: $ratio * $spaceUnit;
-    }
-    &l-#{$size} {
-      margin-left: $ratio * $spaceUnit;
-    }
-    &r-#{$size} {
-      margin-right: $ratio * $spaceUnit;
-    }
-    &x-#{$size} {
-      margin-left: $ratio * $spaceUnit;
-      margin-right: $ratio * $spaceUnit;
-    }
-    &-0 {
-      margin: 0;
-    }
+  @include mediaSpace('margin', '');
+
+  @include small-and-up {
+    @include mediaSpace('margin', '-sm');
   }
 
   @include medium-and-up {
-    @each $size, $ratio in $spaceRatio {
-      &-md-#{$size}, &a-md-#{$size} {
-        margin: $ratio * $spaceUnit;
-      }
-      &t-md-#{$size} {
-        margin-top: $ratio * $spaceUnit;
-      }
-      &b-md-#{$size} {
-        margin-bottom: $ratio * $spaceUnit;
-      }
-      &y-md-#{$size} {
-        margin-top: $ratio * $spaceUnit;
-        margin-bottom: $ratio * $spaceUnit;
-      }
-      &l-md-#{$size} {
-        margin-left: $ratio * $spaceUnit;
-      }
-      &r-md-#{$size} {
-        margin-right: $ratio * $spaceUnit;
-      }
-      &x-md-#{$size} {
-        margin-left: $ratio * $spaceUnit;
-        margin-right: $ratio * $spaceUnit;
-      }
-      &-md-0 {
-        margin: 0;
-      }
-    }
+    @include mediaSpace('margin', '-md');
   }
 
   @include large-and-up {
-    @each $size, $ratio in $spaceRatio {
-      &-lg-#{$size}, &a-lg-#{$size} {
-        margin: $ratio * $spaceUnit;
-      }
-      &t-lg-#{$size} {
-        margin-top: $ratio * $spaceUnit;
-      }
-      &b-lg-#{$size} {
-        margin-bottom: $ratio * $spaceUnit;
-      }
-      &y-lg-#{$size} {
-        margin-top: $ratio * $spaceUnit;
-        margin-bottom: $ratio * $spaceUnit;
-      }
-      &l-lg-#{$size} {
-        margin-left: $ratio * $spaceUnit;
-      }
-      &r-lg-#{$size} {
-        margin-right: $ratio * $spaceUnit;
-      }
-      &x-lg-#{$size} {
-        margin-left: $ratio * $spaceUnit;
-        margin-right: $ratio * $spaceUnit;
-      }
-      &-lg-0 {
-        margin: 0;
-      }
-    }
+    @include mediaSpace('margin', '-lg');
   }
 
   @include extra-large-and-up {
-    @each $size, $ratio in $spaceRatio {
-      &-xl-#{$size}, &a-xl-#{$size} {
-        margin: $ratio * $spaceUnit;
-      }
-      &t-xl-#{$size} {
-        margin-top: $ratio * $spaceUnit;
-      }
-      &b-xl-#{$size} {
-        margin-bottom: $ratio * $spaceUnit;
-      }
-      &y-xl-#{$size} {
-        margin-top: $ratio * $spaceUnit;
-        margin-bottom: $ratio * $spaceUnit;
-      }
-      &l-xl-#{$size} {
-        margin-left: $ratio * $spaceUnit;
-      }
-      &r-xl-#{$size} {
-        margin-right: $ratio * $spaceUnit;
-      }
-      &x-xl-#{$size} {
-        margin-left: $ratio * $spaceUnit;
-        margin-right: $ratio * $spaceUnit;
-      }
-      &-xl-0 {
-        margin: 0;
-      }
-    }
+    @include mediaSpace('margin', '-xl');
   }
 }
 
 /* paddings */
 .p {
-  @each $size, $ratio in $spaceRatio {
-    &-#{$size}, &a-#{$size} {
-      padding: $ratio * $spaceUnit;
-    }
-    &t-#{$size} {
-      padding-top: $ratio * $spaceUnit;
-    }
-    &b-#{$size} {
-      padding-bottom: $ratio * $spaceUnit;
-    }
-    &y-#{$size} {
-      padding-top: $ratio * $spaceUnit;
-      padding-bottom: $ratio * $spaceUnit;
-    }
-    &l-#{$size} {
-      padding-left: $ratio * $spaceUnit;
-    }
-    &r-#{$size} {
-      padding-right: $ratio * $spaceUnit;
-    }
-    &x-#{$size} {
-      padding-left: $ratio * $spaceUnit;
-      padding-right: $ratio * $spaceUnit;
-    }
-    &-0 {
-      padding: 0;
-    }
+  @include mediaSpace('padding', '');
+
+  @include small-and-up {
+    @include mediaSpace('padding', '-sm');
   }
 
   @include medium-and-up {
-    @each $size, $ratio in $spaceRatio {
-      &-md-#{$size}, &a-md-#{$size} {
-        padding: $ratio * $spaceUnit;
-      }
-      &t-md-#{$size} {
-        padding-top: $ratio * $spaceUnit;
-      }
-      &b-md-#{$size} {
-        padding-bottom: $ratio * $spaceUnit;
-      }
-      &y-md-#{$size} {
-        padding-top: $ratio * $spaceUnit;
-        padding-bottom: $ratio * $spaceUnit;
-      }
-      &l-md-#{$size} {
-        padding-left: $ratio * $spaceUnit;
-      }
-      &r-md-#{$size} {
-        padding-right: $ratio * $spaceUnit;
-      }
-      &x-md-#{$size} {
-        padding-left: $ratio * $spaceUnit;
-        padding-right: $ratio * $spaceUnit;
-      }
-      &-md-0 {
-        padding: 0;
-      }
-    }
+    @include mediaSpace('padding', '-md');
   }
 
   @include large-and-up {
-    @each $size, $ratio in $spaceRatio {
-      &-lg-#{$size}, &a-lg-#{$size} {
-        padding: $ratio * $spaceUnit;
-      }
-      &t-lg-#{$size} {
-        padding-top: $ratio * $spaceUnit;
-      }
-      &b-lg-#{$size} {
-        padding-bottom: $ratio * $spaceUnit;
-      }
-      &y-lg-#{$size} {
-        padding-top: $ratio * $spaceUnit;
-        padding-bottom: $ratio * $spaceUnit;
-      }
-      &l-lg-#{$size} {
-        padding-left: $ratio * $spaceUnit;
-      }
-      &r-lg-#{$size} {
-        padding-right: $ratio * $spaceUnit;
-      }
-      &x-lg-#{$size} {
-        padding-left: $ratio * $spaceUnit;
-        padding-right: $ratio * $spaceUnit;
-      }
-      &-lg-0 {
-        padding: 0;
-      }
-    }
+    @include mediaSpace('padding', '-lg');
   }
 
   @include extra-large-and-up {
-    @each $size, $ratio in $spaceRatio {
-      &-xl-#{$size}, &a-xl-#{$size} {
-        padding: $ratio * $spaceUnit;
-      }
-      &t-xl-#{$size} {
-        padding-top: $ratio * $spaceUnit;
-      }
-      &b-xl-#{$size} {
-        padding-bottom: $ratio * $spaceUnit;
-      }
-      &y-xl-#{$size} {
-        padding-top: $ratio * $spaceUnit;
-        padding-bottom: $ratio * $spaceUnit;
-      }
-      &l-xl-#{$size} {
-        padding-left: $ratio * $spaceUnit;
-      }
-      &r-xl-#{$size} {
-        padding-right: $ratio * $spaceUnit;
-      }
-      &x-xl-#{$size} {
-        padding-left: $ratio * $spaceUnit;
-        padding-right: $ratio * $spaceUnit;
-      }
-      &-xl-0 {
-        padding: 0;
-      }
-    }
+    @include mediaSpace('padding', '-xl');
   }
 }
