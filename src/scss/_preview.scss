@@ -1,5 +1,5 @@
 .post-preview {
-  transition: transform ease-in-out $transitionDelay * 2;
+  transition: transform ease-in-out $transitionDurationLong;
 
   &.transformed {
     transform: perspective(1000px) rotateY(-20deg);
@@ -18,7 +18,7 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
-      transition: transform $transitionDelay * 2, filter $transitionDelay;
+      transition: transform $transitionDurationLong, filter $transitionDuration;
       transform-origin: center;
     }
 
@@ -44,7 +44,7 @@
       height: 3px;
       background-color: currentColor;
       width: 40px;
-      transition: width $transitionDelay * 2;
+      transition: width $transitionDurationLong;
       position: absolute;
       top: 0;
       left: 0;

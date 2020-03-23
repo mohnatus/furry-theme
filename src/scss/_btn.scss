@@ -1,0 +1,25 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  height: 40px;
+  padding: 0px 15px;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  background-color: transparent;
+  box-shadow: none;
+  outline: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: 1px solid var(--focus-color);
+    outline-offset: 1px;
+  }
+
+  &-none {
+    padding: 0;
+  }
+}

@@ -23,7 +23,9 @@ ol, ul { list-style: none; }
 
 img { max-width: 100%; }
 
-:root { --content-color: #666666; --service-color: #f3f3f3; --service-dark-color: #e3e3e3; --accent-color-hue: 152deg; --body-bg: white; --main-font: 'Roboto', 'Arial', sans-serif; --header-font: 'Oswald', 'Roboto', 'Arial', sans-serif; }
+input, select, textarea, button { font: inherit; }
+
+:root { --content-color: #333333; --contrast-color: #333333; --contrast-content-color: white; --service-color: #f3f3f3; --service-dark-color: #e3e3e3; --focus-color: aqua; --accent-color-hue: 152deg; --body-bg: white; --main-font: 'Montserrat', 'Arial', sans-serif; --header-font: 'Oswald', 'Montserrat', 'Arial', sans-serif; }
 
 body { background-color: var(--body-bg, white); }
 
@@ -812,13 +814,37 @@ h5, .h5, h6, .h6 { font-size: 0.75rem; line-height: inherit; }
 
 .nolink, .nolink:hover { color: inherit; text-decoration: none; }
 
+.text-right { text-align: right; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; height: 40px; padding: 0px 15px; border-radius: 4px; border-width: 1px; border-style: solid; border-color: transparent; background-color: transparent; box-shadow: none; outline: none; cursor: pointer; }
+
+.btn:focus { outline: 1px solid var(--focus-color); outline-offset: 1px; }
+
+.btn-none { padding: 0; }
+
+input:focus { outline: 1px solid var(--focus-color); outline-offset: 1px; }
+
 .page-top { padding-top: var(--gap, 20px); padding-bottom: var(--gap, 20px); display: flex; align-items: center; justify-content: space-between; }
 
 .social-menu { flex-grow: 1; display: flex; align-items: center; }
 
-.page-title { flex-grow: 1; text-align: center; }
+.page-title { font-size: 2rem; flex-grow: 2; text-align: center; }
+
+.page-title a { position: relative; padding-top: 10px; padding-bottom: 10px; display: inline-block; }
+
+.page-title a:before, .page-title a:after { content: ''; position: absolute; width: 0; height: 4px; background-color: currentColor; transition: width 500ms; will-change: width; }
+
+.page-title a:before { left: 0; top: 0; }
+
+.page-title a:after { right: 0; bottom: 0; }
+
+.page-title a:hover:before, .page-title a:hover:after { width: 100%; }
+
+@media screen and (min-width: 576px) { .page-title { font-size: 2.5rem; } }
 
 .top-menu { flex-grow: 1; }
+
+body.drawer-open .top-menu { opacity: 0; }
 
 .page-banner { position: relative; }
 
@@ -859,3 +885,33 @@ h5, .h5, h6, .h6 { font-size: 0.75rem; line-height: inherit; }
 .nav-links .page-numbers svg { fill: var(--content-color); }
 
 .page-footer { background-color: var(--service-color); }
+
+body.drawer-open { overflow: hidden; }
+
+.drawer { visibility: hidden; opacity: 0; pointer-events: none; position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 10; background: rgba(255, 255, 255, 0.6); transition-property: opacity, visibility; transition-duration: 250ms; transition-delay: 250ms, 0; transition-timing-function: ease-in-out; }
+
+.drawer__mask { cursor: pointer; position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+
+.drawer__panel { position: absolute; top: 0; bottom: 0; left: 0; width: 300px; max-width: 100%; background: var(--contrast-color); color: var(--contrast-content-color); cursor: default; overflow: hidden; transform: translateX(-100%); transition: transform 500ms; -webkit-box-shadow: 7px 0px 14px 0px rgba(50, 50, 50, 0.55); -moz-box-shadow: 7px 0px 14px 0px rgba(50, 50, 50, 0.55); box-shadow: 7px 0px 14px 0px rgba(50, 50, 50, 0.55); }
+
+.drawer__scroll { width: calc(100% + 40px); padding-left: 20px; padding-right: 60px; padding-top: 20px; padding-bottom: 40px; overflow: auto; height: 100%; }
+
+.drawer svg { fill: currentColor; }
+
+body.drawer-open .drawer { visibility: visible; opacity: 1; pointer-events: all; }
+
+body.drawer-open .drawer .drawer__panel { transform: translateX(0%); }
+
+@media screen and (min-width: 768px) { .drawer__close { display: none; } }
+
+.search-form { position: relative; }
+
+.search-form__input { background-color: var(--contrast-content-color); border-radius: 4px; border: none; height: 40px; padding: 0 50px 0 10px; width: 100%; }
+
+.search-form__submit { position: absolute; top: 0; bottom: 0; right: 5px; }
+
+.main-menu { margin-left: -20px; margin-right: -20px; }
+
+.main-menu a { color: inherit; text-decoration: none; display: block; padding: 15px 20px; }
+
+.main-menu a:hover { background-color: rgba(255, 255, 255, 0.2); }

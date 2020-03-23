@@ -1,12 +1,17 @@
 :root {
-  --content-color: #666666;
+  --content-color: #333333;
+
+  --contrast-color: #333333;
+  --contrast-content-color: white;
+
   --service-color: #f3f3f3;
   --service-dark-color: #e3e3e3;
+  --focus-color: aqua;
 
   --accent-color-hue: 152deg;
 
   --body-bg: white;
 
-  --main-font: 'Roboto', 'Arial', sans-serif;
-  --header-font: 'Oswald', 'Roboto', 'Arial', sans-serif;
+  --main-font: 'Montserrat', 'Arial', sans-serif;
+  --header-font: 'Oswald', 'Montserrat', 'Arial', sans-serif;
 }

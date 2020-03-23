@@ -19,7 +19,7 @@ function registerObserver(selector, entryCb, config = {}) {
   elements.forEach(el => observer.observe(el));
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function onLoad() {
   registerObserver('[data-src]', (target) => {
     target.src = target.dataset.src;
     target.removeAttribute('data-src');
@@ -40,4 +40,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }, {
     rootMargin: '-250px'
   });
-})
+
+  const drawerOpeners = Array.from(document.querySelectorAll('[data-drawer-open]'));
+  const drawerClosers = Array.from(document.querySelectorAll('[data-drawer-close]'));
+
+  const drawer = document.querySelector('.drawer');
+  const searchField = drawer.querySelector('[name="s"]');
+  const drawerOpenClass = 'drawer-open';
+
+  function openMenu() {
+    document.body.classList.add(drawerOpenClass);
+    searchField.focus();
+  }
+
+  function closeMenu() {
+    document.body.classList.remove(drawerOpenClass);
+  }
+
+  drawerOpeners.forEach(o => {
+    o.addEventListener('click', openMenu);
+  });
+
+  drawerClosers.forEach(c => {
+    c.addEventListener('click', closeMenu);
+  })
+}
+
+onLoad();

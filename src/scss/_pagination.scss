@@ -15,7 +15,7 @@
     text-decoration: none;
 
     background: var(--service-color);
-    transition: background-color $transitionDelay, color $transitionDelay;
+    transition: background-color $transitionDuration, color $transitionDuration;
 
     &:hover {
       background: black;

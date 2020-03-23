@@ -1,0 +1,6 @@
+input {
+  &:focus {
+    outline: 1px solid var(--focus-color);
+    outline-offset: 1px;
+  }
+}
