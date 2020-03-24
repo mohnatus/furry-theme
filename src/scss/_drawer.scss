@@ -45,6 +45,8 @@ body {
     -webkit-box-shadow: 7px 0px 14px 0px rgba(50, 50, 50, 0.55);
     -moz-box-shadow: 7px 0px 14px 0px rgba(50, 50, 50, 0.55);
      box-shadow: 7px 0px 14px 0px rgba(50, 50, 50, 0.55);
+
+    @include with-adminbar(padding-top);
   }
 
   &__scroll {

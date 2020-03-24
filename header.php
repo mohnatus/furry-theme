@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css?family=Oswald:500&display=swap&subset=cyrillic" rel="stylesheet">
   <?php wp_head(); ?>
 </head>
-<body>
+<body <?php body_class(); ?>>
   <div style="display: none">
     <?php get_template_part('content/svg'); ?>
   </div>

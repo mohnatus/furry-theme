@@ -44,3 +44,8 @@ function furry_pagination_template($template, $class){
 	</nav>
 	';
 }
+
+/** Adminbar margins */
+add_action( 'admin_bar_init', function() {
+  remove_action( 'wp_head', '_admin_bar_bump_cb' );
+});
