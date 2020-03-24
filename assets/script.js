@@ -35,7 +35,7 @@ function onLoad() {
     target.removeAttribute('data-background');
   })
 
-  registerObserver('.post-preview.transformed', (target) => {
+  registerObserver('.entry-preview.transformed', (target) => {
     target.classList.remove('transformed');
   }, {
     rootMargin: '-250px'

@@ -12,6 +12,7 @@ function furry_preview_img($post) {
   $postThumbnailUrl1x = get_the_post_thumbnail_url($postId, 'preview-1x');
   $postThumbnailUrl2x = get_the_post_thumbnail_url($postId, 'preview-2x');
   $postThumbnailUrl3x = get_the_post_thumbnail_url($postId, 'preview-3x');
+  $postThumbnailUrlFull = get_the_post_thumbnail_url($postId, 'full');
 
   return "<picture>
     <source media='(max-width: 420px)'
@@ -22,6 +23,28 @@ function furry_preview_img($post) {
 
     <source
       data-srcset='$postThumbnailUrl1x, $postThumbnailUrl2x 1.5x, $postThumbnailUrl3x 2x'>
+
+    <img data-src='$postThumbnailUrl1x' alt='$postExcerpt'>
+  </picture>";
+}
+function furry_entry_img($post) {
+  $postID = $post->ID;
+  $postExcerpt = $post->excerpt;
+
+  $postThumbnailUrl1x = get_the_post_thumbnail_url($postId, 'preview-1x');
+  $postThumbnailUrl2x = get_the_post_thumbnail_url($postId, 'preview-2x');
+  $postThumbnailUrl3x = get_the_post_thumbnail_url($postId, 'preview-3x');
+  $postThumbnailUrlFull = get_the_post_thumbnail_url($postId, 'full');
+
+  return "<picture>
+    <source media='(max-width: 420px)'
+      data-srcset='$postThumbnailUrl1x, $postThumbnailUrl2x 1.5x, $postThumbnailUrl3x 2x'>
+
+    <source media='(max-width: 820px)'
+      data-srcset='$postThumbnailUrl2x, $postThumbnailUrl3x 1.5x, $postThumbnailUrlFull 2x'>
+
+    <source
+      data-srcset='$postThumbnailUrlFull'>
 
     <img data-src='$postThumbnailUrl1x' alt='$postExcerpt'>
   </picture>";

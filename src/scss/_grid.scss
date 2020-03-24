@@ -45,6 +45,10 @@ $spaceRatio: (
   width: $count * 100% / $columnsCount;
 }
 
+@mixin offset($count) {
+  margin-left: $count * 100% / $columnsCount;
+}
+
 .container {
   width: 100%;
   max-width: 1300px;
@@ -138,23 +142,56 @@ $spaceRatio: (
 }
 
 /* margins */
+@mixin mediaAutoMargin($prefix) {
+
+  &#{$prefix}-auto,
+  &a#{$prefix}-auto {
+    margin: auto;
+  }
+  &t#{$prefix}-auto {
+    margin-top: auto;
+  }
+  &b#{$prefix}-auto {
+    margin-bottom: auto;
+  }
+  &y#{$prefix}-auto {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  &l#{$prefix}-auto {
+    margin-left: auto;
+  }
+  &r#{$prefix}-auto {
+    margin-right: auto;
+  }
+  &x#{$prefix}-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .m {
   @include mediaSpace('margin', '');
+  @include mediaAutoMargin('');
 
   @include small-and-up {
     @include mediaSpace('margin', '-sm');
+    @include mediaAutoMargin('-sm');
   }
 
   @include medium-and-up {
     @include mediaSpace('margin', '-md');
+    @include mediaAutoMargin('-md');
   }
 
   @include large-and-up {
     @include mediaSpace('margin', '-lg');
+    @include mediaAutoMargin('-lg');
   }
 
   @include extra-large-and-up {
     @include mediaSpace('margin', '-xl');
+    @include mediaAutoMargin('-xl');
   }
 }
 
@@ -179,24 +216,120 @@ $spaceRatio: (
   }
 }
 
-body.admin-bar {
-  padding-top: 32px;
-}
-
-@media screen and (max-width: 782px) {
-  body.admin-bar {
-    padding-top: 46px;
-  }
-}
-
-@mixin with-adminbar($propertyName) {
-  body.admin-bar & {
-    #{$propertyName}: 32px;
-  }
-
-  @media screen and (max-width: 782px) {
-    body.admin-bar & {
-      #{$propertyName}: 46px;
+/* offset */
+.offset {
+  @for $i from 1 through $columnsCount {
+    &-#{$i} {
+      @include offset($i);
     }
   }
+
+  @include small-and-up {
+    @for $i from 1 through $columnsCount {
+      &-sm-#{$i} {
+        @include offset($i);
+      }
+    }
+  }
+
+  @include medium-and-up {
+    @for $i from 1 through $columnsCount {
+      &-md-#{$i} {
+        @include offset($i);
+      }
+    }
+  }
+
+  @include large-and-up {
+    @for $i from 1 through $columnsCount {
+      &-lg-#{$i} {
+        @include offset($i);
+      }
+    }
+  }
+
+  @include extra-large-and-up {
+    @for $i from 1 through $columnsCount {
+      &-xl-#{$i} {
+        @include offset($i);
+      }
+    }
+  }
+}
+
+/* flex */
+.d-flex {
+  display: flex;
+}
+.direction {
+  &-column {
+    flex-direction: column;
+    &-reverse {
+      flex-direction: column-reverse;
+    }
+  }
+  &-row {
+    flex-direction: row;
+    &-reverse {
+      flex-direction: row-reverse;
+    }
+  }
+}
+.justify {
+  &-start {
+    justify-content: flex-start;
+  }
+  &-end {
+    justify-content: flex-end;
+  }
+  &-center {
+    justify-content: center;
+  }
+  &-between {
+    justify-content: space-between;
+  }
+  &-around {
+    justify-content: space-around;
+  }
+}
+.align {
+  &-start {
+    align-items: flex-start;
+  }
+  &-right {
+    align-items: flex-end;
+  }
+  &-center {
+    align-items: center;
+  }
+  &-stretch {
+    align-items: stretch;
+  }
+}
+.grow {
+  @for $i from 0 through 10 {
+    &-#{$i} {
+      flex-grow: $i;
+    }
+  }
+}
+.shrink {
+  @for $i from 0 through 10 {
+    &-#{$i} {
+      flex-shrink: $i;
+    }
+  }
+}
+
+.visually-hidden {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+	padding:0 !important;
+	border:0 !important;
+	height: 1px !important;
+	width: 1px !important;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
 }

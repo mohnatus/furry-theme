@@ -1,0 +1,22 @@
+/* adminbar */
+body.admin-bar {
+  padding-top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+  body.admin-bar {
+    padding-top: 46px;
+  }
+}
+
+@mixin with-adminbar($propertyName) {
+  body.admin-bar & {
+    #{$propertyName}: 32px;
+  }
+
+  @media screen and (max-width: 782px) {
+    body.admin-bar & {
+      #{$propertyName}: 46px;
+    }
+  }
+}

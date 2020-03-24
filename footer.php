@@ -1,4 +1,4 @@
-    </main>
+    </div><!-- .page-content -->
 
     <footer class="page-footer py-4 py-md-6">
       <div class="container">

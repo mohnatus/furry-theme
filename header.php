@@ -9,11 +9,11 @@
   <link href="https://fonts.googleapis.com/css?family=Oswald:500&display=swap&subset=cyrillic" rel="stylesheet">
   <?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
+<body <?php body_class('d-flex direction-column'); ?>>
   <div style="display: none">
     <?php get_template_part('content/svg'); ?>
   </div>
-  <div class="page">
+  <div class="page d-flex direction-column grow-1">
 
     <header class="page-header">
       <div class="container">
@@ -24,11 +24,11 @@
               'fallback_cb' => '',
             ]); ?>
           </div>
-          <h2 class="h1 page-title px-1">
+          <div class="h1 page-title px-1">
             <a href="<?= home_url() ?>" class="nolink">
               <?php bloginfo( 'name' ); ?>
             </a>
-          </h2>
+          </div>
           <div class="top-menu">
             <div class="top-menu__control text-right">
               <button class="top-menu__icon btn btn-none" data-drawer-open>
@@ -36,14 +36,11 @@
               </button>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="page-banner">
-        <div class="page-banner__img" data-background="<?= get_template_directory_uri().'/assets/img/banner.jpg' ?>"></div>
-        <div class="page-banner__content">
 
         </div>
+
       </div>
+      <?php get_template_part('content/banner'); ?>
     </header>
 
     <div class="drawer">
@@ -66,4 +63,6 @@
       </div>
     </div>
 
-    <main class="page-main py-6">
+
+
+    <div class="page-content py-6 grow-1">

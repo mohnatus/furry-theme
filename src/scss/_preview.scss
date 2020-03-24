@@ -1,4 +1,4 @@
-.post-preview {
+.entry-preview {
   transition: transform ease-in-out $transitionDurationLong;
 
   &.transformed {
@@ -56,7 +56,7 @@
   }
 
   &:hover {
-    .post-preview__title {
+    .entry-preview__title {
       &:before {
         width: 100%;
       }
