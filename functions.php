@@ -50,5 +50,6 @@ function furry_noindex() {
 	if (is_search()) echo $meta;
 }
 
-require_once('php/clean-comments.php');
+require_once('php/comments.php');
 require_once('php/templates.php');
+require_once('php/utils.php');

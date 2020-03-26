@@ -1,0 +1,28 @@
+.comment {
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+
+  &.not-approved {
+    background: var(--service-color);
+    opacity: 0.7;
+  }
+
+  .children {
+    margin: 20px 0;
+    border-left: 1px solid var(--service-color);
+
+    & > .comment,
+    & > .comment-respond {
+      padding-left: 8px;
+    }
+  }
+
+  @include medium-and-up() {
+    .children {
+      & > .comment,
+      & > .comment-respond {
+        padding-left: 20px;
+      }
+    }
+  }
+}

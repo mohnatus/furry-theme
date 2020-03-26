@@ -11,6 +11,12 @@ h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: var(--header-font);
   font-weight: 900;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+
+  &:first-child {
+    margin-top: 0;
+  }
 }
 
 h1, .h1 {
@@ -66,4 +72,12 @@ h5, .h5, h6, .h6 {
 
 .text-uppercase {
   text-transform: uppercase;
+}
+
+.text-small {
+  font-size: 0.75em;
+}
+
+.bold {
+  font-weight: bold;
 }

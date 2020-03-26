@@ -13,6 +13,8 @@
   box-shadow: none;
   outline: none;
   cursor: pointer;
+  transition: background-color $transitionDuration,
+    color $transitionDuration;
 
   &:focus {
     outline: 1px solid var(--focus-color);
@@ -21,5 +23,14 @@
 
   &-none {
     padding: 0;
+  }
+
+  &-primary {
+    background-color: hsl(var(--accent-color-hue), 30%, 30%);
+    color: var(--accent-contrast-color);
+
+    &:hover {
+      background-color: hsl(var(--accent-color-hue), 30%, 40%);
+    }
   }
 }

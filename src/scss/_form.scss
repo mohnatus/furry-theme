@@ -1,6 +1,60 @@
-input {
+input, textarea {
+  border-color: var(--service-color);
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font: inherit;
+
   &:focus {
     outline: 1px solid var(--focus-color);
     outline-offset: 1px;
+    box-shadow: none;
+  }
+}
+
+input {
+  height: 44px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.form {
+  &-group {
+    margin-bottom: 1em;
+    label {
+      margin-bottom: 0.75em;
+      display: block;
+    }
+  }
+  &-control {
+    display: block;
+    width: 100%;
+
+  }
+}
+
+.checkbox {
+  display: flex;
+  margin-bottom: 1em;
+
+  input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    color: hsl(var(--accent-color-hue), 50%, 50%);
+    border-radius: 4px;
+  }
+  label {
+    padding-top: 2px;
+    line-height: 1.4;
+    color: var(--inactive-color);
+  }
+  input:checked + label {
+    color: var(--content-color);
   }
 }

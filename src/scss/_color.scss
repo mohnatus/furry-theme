@@ -4,6 +4,9 @@ body {
 
 .color {
   &-inactive {
-    color: var(--color-inactive);
+    color: var(--inactive-color);
+  }
+  &-warning {
+    color: var(--warning-color);
   }
 }
