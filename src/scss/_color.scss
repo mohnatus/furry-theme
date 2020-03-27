@@ -5,8 +5,15 @@ body {
 .color {
   &-inactive {
     color: var(--inactive-color);
+    fill: currentColor;
   }
   &-warning {
     color: var(--warning-color);
+    fill: currentColor;
   }
+  &-icon {
+    color: var(--inactive-color);
+    fill: currentColor;
+  }
+
 }

@@ -5,6 +5,7 @@ html {
 body {
   font-family: var(--main-font);
   color: var(--content-color);
+  font-size: 1rem;
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -68,6 +69,10 @@ h5, .h5, h6, .h6 {
 
 .text-center {
   text-align: center;
+}
+
+.text-middle {
+  vertical-align: middle;
 }
 
 .text-uppercase {

@@ -1,0 +1,121 @@
+.ugc {
+  line-height: 1.6;
+
+  p,
+  figure,
+  ul,
+  ol,
+  blockquote {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+
+    &:empty {
+      margin: 0;
+    }
+  }
+
+
+  hr {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    border-color: var(--service-color);
+  }
+
+  blockquote,
+  figure,
+  table,
+  .crayon-syntax {
+    margin-left: -1 * $gap;
+    margin-right: -1 * $gap;
+    width: unset;
+  }
+
+  figure {
+    table {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+
+  figure {
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    figcaption {
+      font-size: 0.75rem;
+      color: var(--service-text-color);
+
+      a { color: inherit; }
+    }
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  ul, ol {
+    list-style: inside;
+
+    li {
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+  }
+
+  blockquote {
+    background-color: var(--service-color);
+    padding: 2em 3em;
+
+    cite {
+      font-size: 0.75rem;
+      text-align: right;
+      display: block;
+      color: var(--service-text-color);
+    }
+  }
+
+  .wp-has-aspect-ratio {
+    &.wp-embed-aspect-16-9 {
+      max-width: 560px;
+
+      .wp-block-embed__wrapper {
+        padding-top: calc(100% / 16 * 9);
+        position: relative;
+
+        iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  table {
+    tr {
+      border-bottom: 1px solid var(--service-color);
+
+      &:hover {
+        background-color: var(--service-color);
+      }
+    }
+    td, th {
+      padding: 10px 15px;
+    }
+  }
+
+  @include small-and-up() {
+    blockquote,
+    figure,
+    table,
+    .crayon-syntax {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 <div id="comments" class="comments mt-6">
 
-  <section class="comments__list">
+  <section class="comments__list mb-6">
     <h2 class="h3">
       <?= $commentsCount ?>
       <?= declination($commentsCount, ['комментарий', 'комментария', 'комментариев']) ?>

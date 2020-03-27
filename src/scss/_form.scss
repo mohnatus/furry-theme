@@ -20,6 +20,7 @@ input {
 
 textarea {
   resize: vertical;
+  min-height: 44px;
 }
 
 .form {
@@ -34,6 +35,11 @@ textarea {
     display: block;
     width: 100%;
 
+  }
+  &-message {
+    font-size: 0.75em;
+    color: var(--inactive-color);
+    margin-top: 0.5em;
   }
 }
 

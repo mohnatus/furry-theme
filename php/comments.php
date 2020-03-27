@@ -55,7 +55,7 @@ class clean_comments_constructor extends Walker_Comment {
           <div class="comment-meta__date color-inactive" title="<?= $commentDateTitle ?>"><?= $commentDate ?></div>
         </div>
       </div>
-      <div class="comment__content my-4">
+      <div class="comment__content ugc my-4">
         <?= $commentText ?>
       </div>
 
@@ -76,7 +76,19 @@ class clean_comments_constructor extends Walker_Comment {
   }
 }
 
-$commentsAllowedTags = ['a', 'abbr', 'blockquote', 'code', 'pre', 'del', 'i', 'em', 'strong', 'b', 'strike'];
+$commentsAllowedTags = [
+  'a' => array(),
+  'abbr' => array(),
+  'blockquote' => array(),
+  'code' => array(),
+  'pre' => array(),
+  'del' => array(),
+  'i' => array(),
+  'em' => array(),
+  'strong' => array(),
+  'b' => array(),
+  'strike' => array()
+];
 
 /** Comments form */
 function furry_comments_form() {
@@ -88,37 +100,52 @@ function furry_comments_form() {
   $currentUser = wp_get_current_user();
   $currentUserName = $currentUser->display_name;
 
+  $allowedTagsList = array_keys($commentsAllowedTags);
+
   $fields =  array(
-    'author' => '<div class="form-group"  data-required>
-      <label for="author">Имя</label>
-      <input class="form-control" id="author" name="author" type="text" value="'.esc_attr($commenter['comment_author']).'" required>
+    'email' => '<div class="col col-12 col-lg-4">
+      <div class="form-group"  data-required>
+        <label for="email">Email <span class="color-inactive"></span></label>
+        <input class="form-control" id="email" name="email" type="text" inputmode="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" value="'.esc_attr($commenter['comment_author_email']).'" required>
+        <div class="form-message">*Не будет опубликован</div>
+      </div>
     </div>',
-    'email' => '<div class="form-group"  data-required>
-      <label for="email">Email <span class="color-inactive">(не будет опубликован)</span></label>
-      <input class="form-control" id="email" name="email" type="text" inputmode="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" value="'.esc_attr($commenter['comment_author_email']).'" required>
+
+    'author' => '<div class="col col-12 col-lg-4">
+      <div class="form-group"  data-required>
+        <label for="author">Имя</label>
+        <input class="form-control" id="author" name="author" type="text" value="'.esc_attr($commenter['comment_author']).'" required>
+      </div>
     </div>',
-    'url' => '<div class="form-group">
-      <label for="url">Сайт</label><input class="form-control" id="url" name="url" type="text" inputmode="url" value="'.esc_attr($commenter['comment_author_url']).'">
+
+    'url' => '<div class="col col-12 col-lg-4">
+      <div class="form-group">
+        <label for="url">Сайт</label>
+        <input class="form-control" id="url" name="url" type="text" inputmode="url" value="'.esc_attr($commenter['comment_author_url']).'">
+      </div>
     </div>',
-    'cookies' => '<div class="checkbox">'.
+    'cookies' => '<div class="col col-12">
+      <div class="checkbox">'.
        sprintf( '<input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"%s />', $consent ).
        '
-			 <label for="wp-comment-cookies-consent">'. __( 'Save my name, email, and website in this browser for the next time I comment.' ) .'</label>
+       <label for="wp-comment-cookies-consent">Сохранить мои данные</label>
+      </div>
 		</div>'
   );
   $args = array(
     'fields' => $fields,
-    'comment_field' => '<div class="form-group" data-required>
-      <label for="comment">Текст комментария</label>
-      <textarea class="form-control" id="comment" name="comment" cols="45" rows="8" required></textarea>
+    'comment_field' => '<div class="col col-12">
+      <div class="form-group" data-required>
+        <textarea class="form-control" id="comment" name="comment" rows="8" placeholder="Комментарий" required></textarea>
+      </div>
     </div>',
 
-    'must_log_in' => '<div class="my-4 color-warning">
+    'must_log_in' => '<div class="mb-4 color-warning">
       Авторизуйтесь, чтобы оставлять комментарии'.
       wp_login_url(apply_filters('the_permalink',get_permalink())).
     '</div>',
 
-    'logged_in_as' => '<div class="my-4">'.
+    'logged_in_as' => '<div class="mb-4 col col-12 color-inactive">'.
       sprintf(
         __('Вы вошли как <a href="%1$s">%2$s</a>. <a href="%3$s">Выйти?</a>'),
         admin_url('profile.php'),
@@ -130,27 +157,29 @@ function furry_comments_form() {
     '</div>',
 
     'comment_notes_before' => '',
-    'comment_notes_after' => '<div class="my-4 color-inactive text-small">'.
-      'Доступные HTML-теги: '.
+    'comment_notes_after' => '<div class="col col-12 mb-6 color-inactive text-small">'.
+      '*Доступные HTML-теги: '.
       implode(
         ', ',
         array_map(
-          function($tag) { return "<code>$tag</code>"; }, $commentsAllowedTags
+          function($tag) { return "<code>$tag</code>"; }, $allowedTagsList
         )
       ).
     '</div>',
 
     'id_form' => 'comments-form',
-    'class_form' => 'form comments-form mb-6',
-    'id_submit' => 'submit',
+    'class_form' => 'form comments-form mb-6 row',
+
     'title_reply' => 'Оставить комментарий',
     'title_reply_to' => 'Ответить %s',
+    'title_reply_before' => '<h2 class="h3">',
+    'title_reply_after' => '</h2>',
 
     'cancel_reply_link' => 'Отменить ответ',
     'cancel_reply_before' => '<span class="text-small ml-2">',
     'cancel_reply_after' => '</span>',
 
-    'submit_button' => '<button type="submit" class="btn btn-primary">Отправить</button>'
+    'submit_button' => '<div class="col col-12 mt-4"><button type="submit" class="btn btn-primary">Отправить</button></div>'
   );
 
   comment_form($args);
@@ -169,6 +198,6 @@ function furry_comment_scripts() {
 
 add_filter('preprocess_comment','furry_sanitize_comment');
 function furry_sanitize_comment($commentdata) {
-  $commentdata['comment_content'] = wp_kses($commentdata['comment_content'], 'default');
+  $commentdata['comment_content'] = wp_kses($commentdata['comment_content'], $commentsAllowedTags);
   return $commentdata;
 }

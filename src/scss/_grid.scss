@@ -257,6 +257,15 @@ $spaceRatio: (
   }
 }
 
+/* display */
+.d-block {
+  display: block;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
 /* flex */
 .d-flex {
   display: flex;
@@ -305,6 +314,9 @@ $spaceRatio: (
   &-stretch {
     align-items: stretch;
   }
+}
+.flex-wrap {
+  flex-wrap: wrap;
 }
 .grow {
   @for $i from 0 through 10 {
