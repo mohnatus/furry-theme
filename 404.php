@@ -3,7 +3,7 @@
 <main class="page-main">
   <div class="container">
 
-    <?php get_template_part('content/content', 'loop'); ?>
+    <?php get_template_part('content/content', 'none'); ?>
 
   </div>
 </main>

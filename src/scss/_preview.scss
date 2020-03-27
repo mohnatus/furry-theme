@@ -38,6 +38,7 @@
     background-color: var(--body-bg, white);
     width: 85%;
     position: relative;
+    margin-bottom: 0;
 
     &:before {
       content: '';

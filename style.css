@@ -1011,9 +1011,13 @@ html { font-size: 16px; }
 
 body { font-family: var(--main-font); color: var(--content-color); font-size: 1rem; }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: var(--header-font); font-weight: 900; margin-top: 1.5em; margin-bottom: 1em; }
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: var(--header-font); font-weight: 900; }
 
-h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child, .h1:first-child, .h2:first-child, .h3:first-child, .h4:first-child, .h5:first-child, .h6:first-child { margin-top: 0; }
+h1, h2, h3, h4, h5, h6 { margin-top: 1.5em; margin-bottom: 1em; }
+
+h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child { margin-top: 0; }
+
+.h0 { font-size: 1rem; font-weight: normal; }
 
 h1, .h1 { font-size: 2.75rem; line-height: 1.2; }
 
@@ -1118,7 +1122,7 @@ body.drawer-open .top-menu { opacity: 0; }
 
 .entry-preview__content { position: relative; }
 
-.entry-preview__title { background-color: var(--body-bg, white); width: 85%; position: relative; }
+.entry-preview__title { background-color: var(--body-bg, white); width: 85%; position: relative; margin-bottom: 0; }
 
 .entry-preview__title:before { content: ''; height: 3px; background-color: currentColor; width: 40px; transition: width 500ms; position: absolute; top: 0; left: 0; }
 
