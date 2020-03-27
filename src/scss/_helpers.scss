@@ -1,0 +1,40 @@
+@mixin textHelpers($prefix: '') {
+  .text#{$prefix}-left { text-align: left; }
+  .text#{$prefix}-right { text-align: right; }
+  .text#{$prefix}-center { text-align: center; }
+  .text#{$prefix}-justify { text-align: justify; }
+
+  .text#{$prefix}-top { vertical-align: top; }
+  .text#{$prefix}-middle { vertical-align: middle; }
+  .text#{$prefix}-bottom { vertical-align: bottom; }
+  .text#{$prefix}-baseline { vertical-align: baseline; }
+
+  .text#{$prefix}-uppercase { text-transform: uppercase; }
+  .text#{$prefix}-lowercase { text-transform: lowercase; }
+  .text#{$prefix}-capitalize { text-transform: capitalize; }
+
+  .text#{$prefix}-small { font-size: 0.75em; }
+  .text#{$prefix}-normal-size { font-size: 1em; }
+  .text#{$prefix}-big { font-size: 1.5em; }
+
+  .text#{$prefix}-bold { font-weight: bold; }
+  .text#{$prefix}-normal-weight { font-weight: normal; }
+}
+
+@include textHelpers('');
+
+@include small-and-up {
+  @include textHelpers('-sm');
+}
+
+@include medium-and-up {
+  @include textHelpers('-md');
+}
+
+@include large-and-up {
+  @include textHelpers('-lg');
+}
+
+@include extra-large-and-up {
+  @include textHelpers('-xl');
+}

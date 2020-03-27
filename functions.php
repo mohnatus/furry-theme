@@ -30,17 +30,49 @@ add_filter('script_loader_tag', 'furry_async_scripts', 10, 2);
 function furry_scripts() {
 	wp_enqueue_script(
     'app',
-    get_template_directory_uri() . '/assets/script.js',
+    get_template_directory_uri() . '/assets/js/script.js',
     array(),
-    filemtime(get_theme_file_path('assets/script.js')),
+    filemtime(get_theme_file_path('assets/js/script.js')),
+    'in_footer'
+  );
+
+  if (is_singular()) {
+    wp_enqueue_script(
+      'entry',
+      get_template_directory_uri() . '/assets/js/entry.js',
+      array(),
+      filemtime(get_theme_file_path('assets/js/entry.js')),
+      'in_footer'
+    );
+  }
+
+  wp_enqueue_script(
+    'advert',
+    get_template_directory_uri() . '/assets/js/a-script.js',
+    array(),
+    filemtime(get_theme_file_path('assets/js/a-script.js')),
     'in_footer'
   );
 }
 function furry_async_scripts($tag, $handle) {
-  if ($handle == 'app') {
+  $async = ['app', 'entry', 'advert'];
+  if (in_array($handle, $async)) {
     return str_replace(' src', ' async src', $tag);
   }
   return $tag;
+}
+
+/** Styles */
+add_action('wp_enqueue_scripts', 'furry_styles');
+function furry_styles() {
+  if (is_singular()) {
+    wp_enqueue_style(
+      'entry',
+      get_template_directory_uri() . '/assets/css/entry.css',
+      array(),
+      filemtime(get_theme_file_path('assets/css/entry.css'))
+    );
+  }
 }
 
 /** No index */
@@ -50,6 +82,7 @@ function furry_noindex() {
 	if (is_search()) echo $meta;
 }
 
+require_once('php/utils.php');
 require_once('php/comments.php');
 require_once('php/templates.php');
-require_once('php/utils.php');
+require_once('php/meta.php');

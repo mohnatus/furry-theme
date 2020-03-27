@@ -100,6 +100,8 @@ function furry_comments_form() {
   $currentUser = wp_get_current_user();
   $currentUserName = $currentUser->display_name;
 
+  $consent = !!$commenter['comment_author'];
+
   $allowedTagsList = array_keys($commentsAllowedTags);
 
   $fields =  array(

@@ -1,5 +1,12 @@
 .ugc {
-  line-height: 1.6;
+  line-height: 1.8;
+
+  ul, ol,
+  blockquote,
+  pre,
+  table {
+    line-height: 1.5;
+  }
 
   p,
   figure,
@@ -14,7 +21,6 @@
     }
   }
 
-
   hr {
     margin-top: 2.5rem;
     margin-bottom: 2.5rem;
@@ -24,14 +30,16 @@
   blockquote,
   figure,
   table,
-  .crayon-syntax {
+  .crayon-syntax,
+  pre {
     margin-left: -1 * $gap;
     margin-right: -1 * $gap;
     width: unset;
+    max-width: calc(100% + 40px);
   }
 
   figure {
-    table {
+    table, pre {
       margin-left: 0;
       margin-right: 0;
     }
@@ -109,11 +117,26 @@
     }
   }
 
+  pre {
+    background-color: var(--service-color);
+    padding: 10px 15px;
+    font-family: var(--formatted-font);
+    white-space: pre;
+    overflow: auto;
+  }
+
+  code {
+    font-size: 0.875em;
+    background: var(--service-color);
+    padding: 2px;
+  }
+
   @include small-and-up() {
     blockquote,
     figure,
     table,
-    .crayon-syntax {
+    .crayon-syntax,
+    pre {
       margin-left: 0;
       margin-right: 0;
     }

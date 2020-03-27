@@ -4,24 +4,28 @@
 */
 
 @import '../node_modules/css-reset/reset.css';
-@import './scss/reset';
+@import './scss/base/reset';
 
 @import './scss/vars';
-@import './scss/theme';
-@import './scss/grid';
-@import './scss/adminbar';
+@import './scss/grid/mixins';
+@import './scss/theme/default';
 
-@import './scss/layout';
-@import './scss/color';
-@import './scss/typography';
-@import './scss/btn';
-@import './scss/form';
-@import './scss/header';
-@import './scss/banner';
-@import './scss/preview';
-@import './scss/ugc';
-@import './scss/pagination';
-@import './scss/comments';
-@import './scss/footer';
-@import './scss/searchform';
-@import './scss/drawer';
+@import './scss/components//adminbar';
+
+@import './scss/grid/grid';
+
+@import './scss/base/layout';
+@import './scss/base/color';
+@import './scss/base/typography';
+
+@import './scss/components/btn';
+@import './scss/components/form';
+@import './scss/components/header';
+@import './scss/components/banner';
+@import './scss/components/preview';
+@import './scss/components/pagination';
+@import './scss/components/footer';
+@import './scss/components/searchform';
+@import './scss/components/drawer';
+
+@import './scss/helpers';

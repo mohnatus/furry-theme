@@ -1,54 +1,3 @@
-$gap: 20px;
-$columnsCount: 12;
-
-$smallDevicesStart: 576px;
-$mediumDevicesStart: 768px;
-$largeDevicesStart: 992px;
-$extraLargeDevicesStart: 1200px;
-
-$spaceUnit: 1em;
-$spaceRatio: (
-  '1': 0.25,
-  '2': 0.5,
-  '3': 0.75,
-  '4': 1.25,
-  '5': 2,
-  '6': 3.25,
-  '7': 5.25,
-);
-
-@mixin small-and-up {
-  @media screen and (min-width: $smallDevicesStart) {
-    @content;
-  }
-}
-
-@mixin medium-and-up {
-  @media screen and (min-width: $mediumDevicesStart) {
-    @content;
-  }
-}
-
-@mixin large-and-up {
-  @media screen and (min-width: $largeDevicesStart) {
-    @content;
-  }
-}
-
-@mixin extra-large-and-up {
-  @media screen and (min-width: $extraLargeDevicesStart) {
-    @content;
-  }
-}
-
-@mixin cols($count) {
-  width: $count * 100% / $columnsCount;
-}
-
-@mixin offset($count) {
-  margin-left: $count * 100% / $columnsCount;
-}
-
 .container {
   width: 100%;
   max-width: 1300px;
@@ -56,6 +5,10 @@ $spaceRatio: (
   margin-right: auto;
   padding-left: $gap;
   padding-right: $gap;
+
+  &--narrow {
+    max-width: 1200px;
+  }
 }
 
 .row {
@@ -109,66 +62,7 @@ $spaceRatio: (
   }
 }
 
-@mixin mediaSpace($property, $prefix: '') {
-  @each $size, $ratio in $spaceRatio {
-    &#{$prefix}-#{$size},
-    &a#{$prefix}-#{$size} {
-      #{$property}: $ratio * $spaceUnit;
-    }
-    &t#{$prefix}-#{$size} {
-      #{$property}-top: $ratio * $spaceUnit;
-    }
-    &b#{$prefix}-#{$size} {
-      #{$property}-bottom: $ratio * $spaceUnit;
-    }
-    &y#{$prefix}-#{$size} {
-      #{$property}-top: $ratio * $spaceUnit;
-      #{$property}-bottom: $ratio * $spaceUnit;
-    }
-    &l#{$prefix}-#{$size} {
-      #{$property}-left: $ratio * $spaceUnit;
-    }
-    &r#{$prefix}-#{$size} {
-      #{$property}-right: $ratio * $spaceUnit;
-    }
-    &x#{$prefix}-#{$size} {
-      #{$property}-left: $ratio * $spaceUnit;
-      #{$property}-right: $ratio * $spaceUnit;
-    }
-    &#{$prefix}-0 {
-      #{$property}: 0;
-    }
-  }
-}
-
 /* margins */
-@mixin mediaAutoMargin($prefix) {
-
-  &#{$prefix}-auto,
-  &a#{$prefix}-auto {
-    margin: auto;
-  }
-  &t#{$prefix}-auto {
-    margin-top: auto;
-  }
-  &b#{$prefix}-auto {
-    margin-bottom: auto;
-  }
-  &y#{$prefix}-auto {
-    margin-top: auto;
-    margin-bottom: auto;
-  }
-  &l#{$prefix}-auto {
-    margin-left: auto;
-  }
-  &r#{$prefix}-auto {
-    margin-right: auto;
-  }
-  &x#{$prefix}-auto {
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
 
 .m {
   @include mediaSpace('margin', '');
@@ -334,13 +228,13 @@ $spaceRatio: (
 }
 
 .visually-hidden {
-	position: absolute !important;
-	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-	clip: rect(1px, 1px, 1px, 1px);
-	padding:0 !important;
-	border:0 !important;
-	height: 1px !important;
-	width: 1px !important;
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
   overflow: hidden;
   visibility: hidden;
   pointer-events: none;

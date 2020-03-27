@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-  <div class="container">
+  <div class="container container--narrow">
 
     <div class="row">
 
@@ -20,15 +20,19 @@
               </div>
             </header>
 
+            <?php get_template_part('content/entry', 'contentlist'); ?>
+
             <div class="entry__content ugc">
               <?php the_content(); ?>
+
+              <?php get_template_part('content/entry', 'source'); ?>
             </div>
 
             <footer class="entry__footer mt-6">
               <div class="entry__meta">
-                <?php $tags = get_tags(); ?>
-                <?php if (count($tags)): ?>
-                  <div class="entry__tags">
+                <?php $tags = get_the_terms($post->ID, 'post_tag'); ?>
+                <?php if ($tags): ?>
+                  <div class="entry__tags ">
                     <svg width="16" height="16" class="color-icon text-middle mr-1">
                       <use xlink:href="#tag-icon" href="#tag-icon">
                     </svg>
@@ -49,29 +53,37 @@
           </article>
 
 
-          <div class="navigation d-flex justify-between mt-6">
+          <div class="navigation mt-6">
             <?php
               $previousPostLink = get_previous_post_link('%link');
               $nextPostLink = get_next_post_link('%link');
-
-              if ($previousPostLink) {
-                echo "<div class='navigation-link navigation-link--prev'>
-                  <div class='navigation-link__title mb-2 color-inactive text-small'>
-                    Предыдущий пост
-                  </div>
-                  $previousPostLink
-                </div>";
-              }
-
-              if ($nextPostLink) {
-                echo "<div class='navigation-link navigation-link--next'>
-                  <div class='navigation-link__title mb-2 color-inactive text-small'>
-                    Следующий пост
-                  </div>
-                  $nextPostLink
-                </div>";
-              }
             ?>
+
+            <?php if ($previousPostLink || $nextPostLink): ?>
+              <div class="row">
+                <div class='col col-12 col-md-6 mb-4'>
+                  <?php if ($previousPostLink): ?>
+                    <div class='navigation-link navigation-link--prev'>
+                      <div class='navigation-link__title mb-2 color-inactive text-small'>
+                        Предыдущий пост
+                      </div>
+                      <?= $previousPostLink ?>
+                    </div>
+                  <?php endif; ?>
+                </div>
+
+                <div class='col col-12 col-md-6 mb4 text-md-right'>
+                  <?php if ($nextPostLink): ?>
+                    <div class='navigation-link navigation-link--next'>
+                      <div class='navigation-link__title mb-2 color-inactive text-small '>
+                        Следующий пост
+                      </div>
+                      <?= $nextPostLink ?>
+                    </div>
+                  <?php endif; ?>
+                </div>
+              </div>
+            <?php endif; ?>
           </div>
 
           <?php comments_template('', true); ?>
@@ -84,9 +96,6 @@
         </aside>
       </div>
     </div>
-
-
-
 
   </div>
 

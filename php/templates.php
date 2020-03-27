@@ -6,13 +6,38 @@ add_image_size('preview-1x', 400, 200, false);
 add_image_size('preview-2x', 800, 400, false);
 add_image_size('preview-3x', 1200, 600, false);
 function furry_preview_img($post) {
-  $postID = $post->ID;
+  $postId = $post->ID;
   $postExcerpt = $post->excerpt;
+
+  $postThumbnailUrlFull = get_the_post_thumbnail_url($postId, 'full');
+
+  if (!$postThumbnailUrlFull) {
+    $previewPath = get_template_directory_uri() . '/assets/img';
+    $previewWebp = "{$previewPath}/preview-default-3x.webp";
+    $preview1x = "{$previewPath}/preview-default-1x.png";
+    $preview2x = "{$previewPath}/preview-default-2x.png";
+    $preview3x = "{$previewPath}/preview-default-3x.png";
+
+    return "<picture>
+      <source type='image/webp'
+        data-srcset='$previewWebp'>
+      <source media='(max-width: 420px)'
+        data-srcset='$preview1x, $preview2x 1.5x, $preview3x 2x'>
+
+      <source media='(max-width: 767px)'
+        data-srcset='$preview2x, $preview3x 2x'>
+
+      <source
+        data-srcset='$preview1x, $preview2x 1.5x, $preview3x 2x'>
+
+      <img data-src='$preview1x' alt='$postExcerpt'>
+    </picture>";
+  }
 
   $postThumbnailUrl1x = get_the_post_thumbnail_url($postId, 'preview-1x');
   $postThumbnailUrl2x = get_the_post_thumbnail_url($postId, 'preview-2x');
   $postThumbnailUrl3x = get_the_post_thumbnail_url($postId, 'preview-3x');
-  $postThumbnailUrlFull = get_the_post_thumbnail_url($postId, 'full');
+
 
   return "<picture>
     <source media='(max-width: 420px)'
