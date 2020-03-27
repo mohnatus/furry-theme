@@ -65,6 +65,13 @@ function furry_async_scripts($tag, $handle) {
 /** Styles */
 add_action('wp_enqueue_scripts', 'furry_styles');
 function furry_styles() {
+  wp_enqueue_style(
+    'app',
+    get_stylesheet_uri(),
+    array(),
+    filemtime(get_theme_file_path('style.css'))
+  );
+
   if (is_singular()) {
     wp_enqueue_style(
       'entry',

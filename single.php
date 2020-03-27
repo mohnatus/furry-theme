@@ -5,28 +5,42 @@
     <div class="row">
 
       <div class="col col-12 col-lg-8 col-xl-9">
-        <main class="page-main">
+        <main class="page-main"  class="entry" itemscope itemtype="http://schema.org/Article">
 
           <?php the_post(); ?>
 
-          <article id="entry-<?php the_ID(); ?>" class="entry">
+          <article id="entry-<?php the_ID(); ?>">
+
             <header class="entry__header visually-hidden">
               <div class="entry__meta">
-                <h1 class="entry__title my-2"><?php the_title(); ?></h1>
+                <h1 itemprop="headline" class="entry__title my-2"><?php the_title(); ?></h1>
                 <span class="entry__categories">
                   <?php the_category(', '); ?>
                 </span>
-                <span class="entry__time" title="<?php the_time('j F Y, h:i') ?>"><?php the_time('j/m/Y'); ?></span>
+                <time class="entry__time" datetime="<?php the_time('c'); ?>" title="<?php the_time('j F Y, h:i') ?>"><?php the_time('j/m/Y'); ?></time>
+                <meta itemprop="dateCreated" content="<?php the_time('c'); ?>">
+                <meta itemprop="datePublished" content="<?php the_time('c'); ?>">
+                <meta itemprop="dateModified" content="<?php the_time('c'); ?>">
+                <meta itemprop="author" content="<?= get_the_author() ?>"/>
+                <meta itemprop="inLanguage" content="ru-RU">
+                <meta itemprop="isFamilyFriendly" content="true">
+                <meta itemprop="keywords" content="">
+                <?php
+                  $postMetaThumbnail = get_the_post_thumbnail_url($post->ID, 'full');
+                  if (!$postMetaThumbnail) {
+                    $postMetaThumbnail = get_template_directory_uri() . '/assets/img/preview-default-3x.png';
+                  }
+                ?>
+                <meta itemprop="image" content="<?= $postMetaThumbnail  ?>">
               </div>
             </header>
 
             <?php get_template_part('content/entry', 'contentlist'); ?>
 
-            <div class="entry__content ugc">
+            <div class="entry__content ugc" itemprop="articleBody">
               <?php the_content(); ?>
-
-              <?php get_template_part('content/entry', 'source'); ?>
             </div>
+            <?php get_template_part('content/entry', 'source'); ?>
 
             <footer class="entry__footer mt-6">
               <div class="entry__meta">

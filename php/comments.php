@@ -33,7 +33,7 @@ class clean_comments_constructor extends Walker_Comment {
       'reply_text' => 'Ответить',
       'login_text' => 'Залогиньтесь, чтобы оставить комментарий'
     ]));
-    $commentEdit = get_edit_comment_link($link);
+    $commentEdit = get_edit_comment_link($commentID);
 
     $commentFeedback = '';
     if (!$isApproved) {
@@ -42,7 +42,7 @@ class clean_comments_constructor extends Walker_Comment {
       </div>';
     };
 
-    echo "<li id='comment-$commentID' class='$commentClasses'>";
+    echo "<li id='comment-$commentID' class='$commentClasses' itemprop='comment' itemscope itemtype='https://schema.org/Comment'>";
     ?>
 
       <?= $commentFeedback; ?>

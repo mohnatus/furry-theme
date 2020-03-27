@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html <?php language_attributes() ?>>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="<?php bloginfo( 'charset' ); ?>">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?php echo wp_get_document_title(); ?></title>
-  <link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>" type="text/css" />
+
+  <?php get_template_part('content/meta'); ?>
+
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap&subset=cyrillic-ext" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Oswald:500&display=swap&subset=cyrillic" rel="stylesheet">
   <?php wp_head(); ?>
@@ -26,7 +28,7 @@
           </div>
           <div class="h1 page-title px-1">
             <a href="<?= home_url() ?>" class="nolink">
-              <?php bloginfo( 'name' ); ?>
+              <?php bloginfo('name'); ?>
             </a>
           </div>
           <div class="top-menu">

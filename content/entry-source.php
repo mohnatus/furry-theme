@@ -7,7 +7,7 @@
   ];
 
   if ($source['link']) {
-
+    echo "<meta itemprop='isBasedOn' content='{$source["link"]}'>";
     $author = "";
     if ($source['author']) {
       if ($source['author_link']) {
