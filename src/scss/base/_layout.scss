@@ -2,8 +2,12 @@ body {
   min-height: 100vh;
 }
 
-.container {
-  &--narrow {
-    max-width: 800px;
-  }
+.content-width {
+  max-width: 800px;
+}
+
+.page-sidebar {
+  position: sticky;
+
+  @include with-adminbar('top', 10px);
 }

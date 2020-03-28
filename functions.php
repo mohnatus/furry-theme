@@ -85,3 +85,4 @@ require_once('php/utils.php');
 require_once('php/comments.php');
 require_once('php/templates.php');
 require_once('php/meta.php');
+require_once('php/admin.php');

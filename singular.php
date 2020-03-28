@@ -1,16 +1,16 @@
 <?php get_header(); ?>
 
 <?php
-  $sidebarVisible = false;
+  $sidebarVisible = is_active_sidebar('main-sidebar');
   $contentClasses = $sidebarVisible ? "col col-12 col-lg-8 col-xl-9" :  "col col-12";
 ?>
 
-<div class="container container--narrow">
+<div class="container">
 
   <div class="row">
 
     <div class="<?= $contentClasses ?>">
-      <main class="page-main"  class="entry" itemscope itemtype="http://schema.org/Article">
+      <main class="page-main content-width mx-auto"  class="entry" itemscope itemtype="http://schema.org/Article">
 
         <?php the_post(); ?>
 

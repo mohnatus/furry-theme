@@ -9,14 +9,16 @@ body.admin-bar {
   }
 }
 
-@mixin with-adminbar($propertyName) {
+@mixin with-adminbar($propertyName, $offset: 0px) {
   body.admin-bar & {
-    #{$propertyName}: 32px;
+    #{$propertyName}: 32px + $offset;
+
+    @content;
   }
 
   @media screen and (max-width: 782px) {
     body.admin-bar & {
-      #{$propertyName}: 46px;
+      #{$propertyName}: 46px + $offset;
     }
   }
 }

@@ -373,6 +373,11 @@ function setTop() {
   main.querySelector('.container').insertAdjacentElement('afterbegin', createBlock('header'));
 }
 
+function setBottom() {
+  var pageContent = document.querySelector('.page-content');
+  pageContent.querySelector('.container').insertAdjacentElement('beforeend', createBlock('footer'));
+}
+
 function ASet() {
   if (isSingular()) {
     setInPost();
@@ -380,6 +385,7 @@ function ASet() {
     setTop();
   }
 
+  setBottom();
   AInit();
 }
 

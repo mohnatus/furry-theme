@@ -31,12 +31,19 @@ function setTop() {
   main.querySelector('.container').insertAdjacentElement('afterbegin', createBlock('header'));
 }
 
+function setBottom() {
+  const pageContent = document.querySelector('.page-content');
+  pageContent.querySelector('.container').insertAdjacentElement('beforeend', createBlock('footer'));
+}
+
 export function ASet() {
   if (isSingular()) {
     setInPost();
   } else {
     setTop();
   }
+
+  setBottom();
 
   AInit();
 }
