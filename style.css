@@ -1172,6 +1172,13 @@ body.drawer-open .drawer .drawer__panel { transform: translateX(0%); }
 
 .main-menu a:hover { background-color: rgba(255, 255, 255, 0.2); }
 
+/* A-blocks */
+.a-block--error { font-size: 0.875rem; padding: 10px 0; color: rgba(0, 0, 0, 0.5); text-align: right; }
+
+.a-block--loaded { margin-bottom: 20px; }
+
+.a-block--loaded[data-a-name="inPost"] { margin-top: 20px; }
+
 .text-left { text-align: left; }
 
 .text-right { text-align: right; }

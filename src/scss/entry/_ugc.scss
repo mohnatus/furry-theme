@@ -131,6 +131,10 @@
     padding: 2px;
   }
 
+  .codepen-embed {
+    margin: 40px 0;
+  }
+
   @include small-and-up() {
     blockquote,
     figure,

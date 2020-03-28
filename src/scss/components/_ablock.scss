@@ -1,0 +1,15 @@
+/* A-blocks */
+.a-block--error {
+  font-size: 0.875rem;
+  padding: 10px 0;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: right;
+}
+
+.a-block--loaded {
+  margin-bottom: 20px;
+
+  &[data-a-name="inPost"] {
+    margin-top: 20px;
+  }
+}
