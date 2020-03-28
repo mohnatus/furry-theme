@@ -14,6 +14,8 @@
   align-items: center;
 
   a {
+    color: var(--content-color);
+
     &:hover {
       color: hsl(var(--accent-color-hue), 30%, 40%);
     }

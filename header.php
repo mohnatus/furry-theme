@@ -7,11 +7,13 @@
 
   <?php get_template_part('content/meta'); ?>
 
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap&subset=cyrillic-ext" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Oswald:500&display=swap&subset=cyrillic" rel="stylesheet">
   <?php wp_head(); ?>
 
   <?= get_option( 'analytics_head' ); ?>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() { window.contentLoaded = true; });
+  </script>
 
 </head>
 <body <?php body_class('d-flex direction-column'); ?>>

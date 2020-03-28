@@ -37,11 +37,11 @@ function setBottom() {
 }
 
 export function ASet() {
-  if (isSingular()) {
-    setInPost();
-  } else {
-    setTop();
-  }
+  // if (isSingular()) {
+  //   setInPost();
+  // } else {
+  //   setTop();
+  // }
 
   setBottom();
 

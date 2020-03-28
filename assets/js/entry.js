@@ -3,4 +3,3 @@ parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcel
 },{}],"BZ3n":[function(require,module,exports) {
 "use strict";var t=require("./js/contentlist");(0,t.ContentList)();
 },{"./js/contentlist":"h30O"}]},{},["BZ3n"], null)
-//# sourceMappingURL=/entry.js.map

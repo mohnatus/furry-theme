@@ -5,7 +5,7 @@
         <div>© <?php bloginfo( 'name' ); ?></div>
 
 
-        <?php if (current_user_can('edit_files')): ?>
+        <?php if (is_user_logged_in()): ?>
           <div class="mt-4">
             <?= get_option( 'analytics_body_bottom' ); ?>
           </div>

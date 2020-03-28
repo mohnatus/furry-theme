@@ -1,5 +1,5 @@
 const defaultConfig = {
-  rootMargin: '100px'
+  rootMargin: '40px'
 }
 
 export function registerObserver(selector, entryCb, config = {}) {

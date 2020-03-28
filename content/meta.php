@@ -33,5 +33,5 @@
 <meta name="og:image" content="<?= $pageImage ?>">
 <meta name="og:url" content="<?= home_url().$_SERVER['REQUEST_URI'] ?>">
 <meta name="og:description" content="<?= $pageDescription ?>">
-<meta name="og:locale" content="ru_RU">
+<meta name="og:locale" content="ru-RU">
 <meta name="og:site_name" content="<?= $siteName ?>">

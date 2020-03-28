@@ -1,5 +1,5 @@
 <div class="page-banner">
-  <div class="page-banner__img" data-background="<?= get_template_directory_uri().'/assets/img/banner.jpg' ?>"></div>
+  <div class="page-banner__img" data-style="background-image: url(<?= get_template_directory_uri().'/assets/img/banner.jpg' ?>); background-image: url(<?= get_template_directory_uri().'/assets/img/banner.webp' ?>)"></div>
   <div class="page-banner__content text-center d-flex align-center">
 
   <?php if (is_search()): ?>

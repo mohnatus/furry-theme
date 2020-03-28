@@ -120,12 +120,6 @@ function furry_comments_form() {
       </div>
     </div>',
 
-    'url' => '<div class="col col-12 col-lg-4">
-      <div class="form-group">
-        <label for="url">Сайт</label>
-        <input class="form-control" id="url" name="url" type="text" inputmode="url" value="'.esc_attr($commenter['comment_author_url']).'">
-      </div>
-    </div>',
     'cookies' => '<div class="col col-12">
       <div class="checkbox">'.
        sprintf( '<input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"%s />', $consent ).

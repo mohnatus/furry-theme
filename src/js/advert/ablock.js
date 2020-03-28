@@ -10,6 +10,7 @@ const insAttrs = {
   'class': 'adsbygoogle',
   'style': 'display:block; text-align: center;',
   'data-ad-client': client,
+  'data-ad-format': 'fluid',
   'data-full-width-responsive': 'true'
 }
 
