@@ -44,6 +44,8 @@
 
 .ugc code { font-size: 0.875em; background: var(--service-color); padding: 2px; }
 
+.ugc .codepen-embed { margin: 40px 0; }
+
 @media screen and (min-width: 576px) { .ugc blockquote, .ugc figure, .ugc table, .ugc .crayon-syntax, .ugc pre { margin-left: 0; margin-right: 0; } }
 
 .comment { padding-top: 0.75em; padding-bottom: 0.75em; }

@@ -13,7 +13,7 @@ function furry_meta_boxes() {
   global $metaboxes;
 
   foreach($metaboxes as $key=>$title) {
-    add_meta_box($key, $title, $key.'_meta_box', 'post', 'normal', 'high');
+    add_meta_box($key, $title, $key.'_meta_box', array('post', 'page'), 'normal', 'high');
   }
 }
 

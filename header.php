@@ -11,22 +11,12 @@
   <link href="https://fonts.googleapis.com/css?family=Oswald:500&display=swap&subset=cyrillic" rel="stylesheet">
   <?php wp_head(); ?>
 
-  <!-- Yandex.Metrika counter -->
-	<script type="text/javascript" >
-	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-	   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+  <?= get_option( 'analytics_head' ); ?>
 
-	   ym(37661975, "init", {
-			clickmap:true,
-			trackLinks:true,
-			accurateTrackBounce:true
-	   });
-	</script>
-	<noscript><div><img src="https://mc.yandex.ru/watch/37661975" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-  <!-- /Yandex.Metrika counter -->
 </head>
 <body <?php body_class('d-flex direction-column'); ?>>
+  <?= get_option( 'analytics_body_top' ); ?>
+
   <div style="display: none">
     <?php get_template_part('content/svg'); ?>
   </div>

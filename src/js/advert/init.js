@@ -3,7 +3,7 @@ import { script, node } from "../utils/dom";
 import { url } from "./data";
 
 function isSingular() {
-  return document.body.classList.contains('single');
+  return document.body.classList.contains('single') || document.body.classList.contains('page');
 }
 
 function createBlock(name) {

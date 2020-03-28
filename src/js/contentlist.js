@@ -32,7 +32,6 @@ function createItem(item) {
 }
 
 function createList(items, className) {
-  console.log(items)
   let list = document.createElement('ul');
   if (className) list.className = className;
   items.forEach((itemData) => {
