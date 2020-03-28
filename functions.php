@@ -101,13 +101,11 @@ function furry_styles() {
   }
 }
 function furry_async_styles( $html, $handle, $href, $media ) {
-  $sync = ['app'];
-
-  if (in_array($handle, $sync)) {
-    return $html;
-  }
-
-	return "<link rel='stylesheet' data-href='$href' media='all' data-async-style>";
+  return "<link rel='preload' as='style' href='$href'>
+    <link rel='stylesheet'
+    data-href='$href'
+    media='all'
+    data-async-style>";
 }
 
 /** No index */
