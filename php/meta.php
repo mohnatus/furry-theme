@@ -5,7 +5,8 @@ add_action('save_post', 'furry_meta_update', 0);
 
 $metaboxes = [
   'source' => 'Оригинал статьи',
-  'contentlist' => 'Блок Содержание статьи'
+  'contentlist' => 'Блок Содержание статьи',
+  'pagemeta' => 'Мета-данные статьи'
 ];
 
 function furry_meta_boxes() {
@@ -82,6 +83,36 @@ function contentlist_meta_box($post) {
     </div>
 
     <input type="hidden" name="contentlist_nonce" value="<?php echo wp_create_nonce(__FILE__); ?>" />
+  <?php
+}
+
+function pagemeta_meta_box($post) {
+  $postId = $post->ID;
+  $metaTitle = get_post_meta($postId, 'pagemeta_title', 1);
+  $metaDescription = get_post_meta($postId, 'pagemeta_description', 1);
+  $metaKeywords = get_post_meta($postId, 'pagemeta_keywords', 1);
+  ?>
+
+    <div class="form-group" style="margin: 20px 0">
+      <label for="pagemeta-title">Title</label>
+      <br>
+      <input type="text" id="pagemeta-title" name="pagemeta[title]" value="<?= $metaTitle ?>" style="width: 100%">
+    </div>
+
+    <div class="form-group" style="margin: 20px 0">
+      <label for="pagemeta-description">Description</label>
+      <br>
+      <input type="text" id="pagemeta-description" name="pagemeta[description]" value="<?= $metaDescription ?>" style="width: 100%">
+    </div>
+
+    <div class="form-group" style="margin: 20px 0">
+      <label for="pagemeta-keywords">Keywords</label>
+      <br>
+      <input type="text" id="pagemeta-keywords" name="pagemeta[keywords]" value="<?= $metaKeywords ?>" style="width: 100%">
+    </div>
+
+
+    <input type="hidden" name="pagemeta_nonce" value="<?php echo wp_create_nonce(__FILE__); ?>" />
   <?php
 }
 

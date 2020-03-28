@@ -1,3 +1,9 @@
 body {
   min-height: 100vh;
 }
+
+.container {
+  &--narrow {
+    max-width: 800px;
+  }
+}

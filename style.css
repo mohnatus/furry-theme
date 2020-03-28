@@ -34,8 +34,6 @@ body.admin-bar { padding-top: 32px; }
 
 .container { width: 100%; max-width: 1300px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
 
-.container--narrow { max-width: 1200px; }
-
 .row { margin-left: -10px; margin-right: -10px; display: flex; flex-wrap: wrap; }
 
 .col { padding-left: 10px; padding-right: 10px; }
@@ -1000,6 +998,8 @@ body.admin-bar { padding-top: 32px; }
 .visually-hidden { position: absolute !important; clip: rect(1px 1px 1px 1px); /* IE6, IE7 */ clip: rect(1px, 1px, 1px, 1px); padding: 0 !important; border: 0 !important; height: 1px !important; width: 1px !important; overflow: hidden; visibility: hidden; pointer-events: none; }
 
 body { min-height: 100vh; }
+
+.container--narrow { max-width: 800px; }
 
 body { background-color: var(--body-bg, white); }
 
