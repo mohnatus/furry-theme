@@ -3,25 +3,11 @@
   Author: FurryCat
 */
 
-@import '../node_modules/css-reset/reset.css';
-@import './scss/base/reset';
-
 @import './scss/vars';
 @import './scss/grid/mixins';
-@import './scss/base/adminbar';
-@import './scss/theme/default';
+@import './scss/wp/vars';
 
-@import './scss/grid/grid';
-
-@import './scss/base/layout';
-@import './scss/base/color';
-@import './scss/base/typography';
-
-@import './scss/components/btn';
 @import './scss/components/form';
-@import './scss/components/header';
-@import './scss/components/banner';
-@import './scss/components/preview';
 @import './scss/components/pagination';
 @import './scss/components/footer';
 @import './scss/components/searchform';

@@ -1,7 +1,7 @@
 export function loadFonts() {
-  const links = [...document.querySelectorAll('[data-font]')];
+  const links = [...document.querySelectorAll('[data-async-style]')];
   links.forEach(l => {
     l.href = l.dataset.href;
-    l.removeAttribute('data-href');
+    //l.removeAttribute('data-async-style');
   });
 }

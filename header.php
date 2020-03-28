@@ -7,7 +7,16 @@
 
   <?php get_template_part('content/meta'); ?>
 
+  <style id="critical-css">
+    <?php
+      $criticalFile = get_theme_file_path('/assets/css/critical.css');
+      echo file_get_contents($criticalFile);
+    ?>
+  </style>
+
   <?php wp_head(); ?>
+
+
 
   <?= get_option( 'analytics_head' ); ?>
 

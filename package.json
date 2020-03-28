@@ -5,17 +5,27 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+
     "scss:main": "node-sass src/style.scss style.css --importer node_modules/node-sass-import --output-style compact",
     "scss:main:w": "node-sass src/style.scss style.css --importer node_modules/node-sass-import --output-style compact --watch",
     "scss:main:minify": "csso style.css --comments exclamation -o style.css",
     "scss:main:build": "npm run scss:main && npm run scss:main:minify",
+
     "scss:entry": "node-sass src/entry.scss assets/css/entry.css --importer node_modules/node-sass-import --output-style compact",
     "scss:entry:w": "node-sass src/entry.scss assets/css/entry.css --importer node_modules/node-sass-import --output-style compact --watch",
     "scss:entry:minify": "csso assets/css/entry.css -o assets/css/entry.css",
     "scss:entry:build": "npm run scss:entry && npm run scss:entry:minify",
-    "scss:build": "npm run scss:main:build && npm run scss:entry:build",
+
+    "scss:critical": "node-sass src/critical.scss assets/css/critical.css --importer node_modules/node-sass-import --output-style compact",
+    "scss:critical:w": "node-sass src/critical.scss assets/css/critical.css --importer node_modules/node-sass-import --output-style compact --watch",
+    "scss:critical:minify": "csso assets/css/critical.css -o assets/css/critical.css",
+    "scss:critical:build": "npm run scss:critical && npm run scss:critical:minify",
+
+    "scss:build": "npm run scss:main:build && npm run scss:entry:build && npm run scss:critical:build",
+
     "js:w": "parcel src/*.js --out-dir assets/js --no-cache --no-source-maps",
     "js:build": "parcel build src/*.js --out-dir assets/js --no-cache --no-source-maps",
+
     "build": "npm run scss:build && npm run js:build"
   },
   "keywords": [],

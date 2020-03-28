@@ -60,9 +60,14 @@ function furry_async_scripts($tag, $handle) {
 
 /** Styles */
 add_action('wp_enqueue_scripts', 'furry_styles');
-add_filter('style_loader_tag', 'furry_async_fonts', 10, 4 );
+add_filter('style_loader_tag', 'furry_async_styles', 10, 4 );
+
 function furry_styles() {
-  //wp_deregister_style('dashicons');
+
+  if (!is_user_logged_in()) {
+    wp_deregister_style('dashicons');
+  }
+
   wp_dequeue_style('wp-block-library');
 
   wp_enqueue_style(
@@ -95,12 +100,14 @@ function furry_styles() {
     );
   }
 }
-function furry_async_fonts( $html, $handle, $href, $media ) {
-  $pos = strrpos($handle, "font");
-  $async = ['dashicons'];
-  if ($pos === false && !in_array($handle, $async)) return $html;
+function furry_async_styles( $html, $handle, $href, $media ) {
+  $sync = ['app'];
 
-	return "<link rel='stylesheet' data-href='$href' media='all' data-font>";
+  if (in_array($handle, $sync)) {
+    return $html;
+  }
+
+	return "<link rel='stylesheet' data-href='$href' media='all' data-async-style>";
 }
 
 /** No index */
