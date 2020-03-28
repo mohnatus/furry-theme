@@ -64,11 +64,13 @@ add_filter('style_loader_tag', 'furry_async_styles', 10, 4 );
 
 function furry_styles() {
 
-  if (!is_user_logged_in()) {
+  if (!is_user_logged_in() && !is_admin()) {
     wp_deregister_style('dashicons');
   }
 
-  wp_dequeue_style('wp-block-library');
+  if (!is_admin()) {
+    wp_dequeue_style('wp-block-library');
+  }
 
   wp_enqueue_style(
     'app',
@@ -101,6 +103,7 @@ function furry_styles() {
   }
 }
 function furry_async_styles( $html, $handle, $href, $media ) {
+  if (is_admin()) return $html;
   return "<link rel='preload' as='style' href='$href'>
     <link rel='stylesheet'
     data-href='$href'
@@ -116,17 +119,19 @@ function furry_noindex() {
 }
 
 /** Emojis */
-function disable_emojis() {
-  remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-  remove_action( 'wp_print_styles', 'print_emoji_styles' );
-  remove_action( 'admin_print_styles', 'print_emoji_styles' );
-  remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
-  remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
-  remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
-  add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
-  add_filter( 'wp_resource_hints', 'disable_emojis_remove_dns_prefetch', 10, 2 );
-}
 add_action( 'init', 'disable_emojis' );
+function disable_emojis() {
+  if (!is_admin()) {
+    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+    remove_action( 'wp_print_styles', 'print_emoji_styles' );
+    remove_action( 'admin_print_styles', 'print_emoji_styles' );
+    remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+    remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+    remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+    add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
+    add_filter( 'wp_resource_hints', 'disable_emojis_remove_dns_prefetch', 10, 2 );
+  }
+}
 function disable_emojis_tinymce( $plugins ) {
   if ( is_array( $plugins ) ) {
     return array_diff( $plugins, array( 'wpemoji' ) );
@@ -144,7 +149,6 @@ function disable_emojis_remove_dns_prefetch( $urls, $relation_type ) {
   }
   return $urls;
 }
-
 
 remove_action( 'wp_head', 'wlwmanifest_link' );
 remove_action( 'wp_head', 'wp_generator' );
