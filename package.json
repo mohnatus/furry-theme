@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "scss": "node-sass src/style.scss style.css --importer node_modules/node-sass-import --output-style compact",
-    "scss:w": "node-sass src/style.scss style.css --importer node_modules/node-sass-import --output-style compact --watch",
+    "scss:main": "node-sass src/style.scss style.css --importer node_modules/node-sass-import --output-style compact",
+    "scss:main:w": "node-sass src/style.scss style.css --importer node_modules/node-sass-import --output-style compact --watch",
     "scss:entry": "node-sass src/entry.scss assets/css/entry.css --importer node_modules/node-sass-import --output-style compact",
-    "scss:entry:w": "node-sass src/entry.scss assets/css/entry.css --importer node_modules/node-sass-import --output-style compact --watch"
+    "scss:entry:w": "node-sass src/entry.scss assets/css/entry.css --importer node_modules/node-sass-import --output-style compact --watch",
+    "js": "parcel src/*.js --out-dir assets/js --no-cache"
   },
   "keywords": [],
   "author": "",

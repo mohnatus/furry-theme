@@ -30,9 +30,9 @@ add_filter('script_loader_tag', 'furry_async_scripts', 10, 2);
 function furry_scripts() {
 	wp_enqueue_script(
     'app',
-    get_template_directory_uri() . '/assets/js/script.js',
+    get_template_directory_uri() . '/assets/js/app.js',
     array(),
-    filemtime(get_theme_file_path('assets/js/script.js')),
+    filemtime(get_theme_file_path('assets/js/app.js')),
     'in_footer'
   );
 
@@ -45,14 +45,6 @@ function furry_scripts() {
       'in_footer'
     );
   }
-
-  wp_enqueue_script(
-    'advert',
-    get_template_directory_uri() . '/assets/js/a-script.js',
-    array(),
-    filemtime(get_theme_file_path('assets/js/a-script.js')),
-    'in_footer'
-  );
 }
 function furry_async_scripts($tag, $handle) {
   $async = ['app', 'entry', 'advert'];
