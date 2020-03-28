@@ -9,7 +9,8 @@
 .a-block--loaded {
   margin-bottom: 20px;
 
-  &[data-a-name="inPost"] {
+  &[data-a-name="inPost"],
+  &[data-a-name="inFooter"] {
     margin-top: 20px;
   }
 }

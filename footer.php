@@ -5,9 +5,10 @@
         <div>© <?php bloginfo( 'name' ); ?></div>
 
 
-
         <?php if (current_user_can('edit_files')): ?>
-          <?= get_option( 'analytics_body_bottom' ); ?>
+          <div class="mt-4">
+            <?= get_option( 'analytics_body_bottom' ); ?>
+          </div>
 				<?php endif; ?>
       </div>
 

@@ -1080,6 +1080,10 @@ textarea { resize: vertical; min-height: 44px; }
 
 .social-menu { flex-grow: 1; display: flex; align-items: center; }
 
+.social-menu a:hover { color: hsl(var(--accent-color-hue), 30%, 40%); }
+
+.social-menu a svg { fill: currentColor; }
+
 .page-title { font-size: 2rem; flex-grow: 2; text-align: center; margin: 0; }
 
 .page-title a { position: relative; padding-top: 10px; padding-bottom: 10px; display: inline-block; }
@@ -1122,7 +1126,7 @@ body.drawer-open .top-menu { opacity: 0; }
 
 .entry-preview__title:before { content: ''; height: 3px; background-color: currentColor; width: 40px; transition: width 500ms; position: absolute; top: 0; left: 0; }
 
-.entry-preview__text { background-color: var(--body-bg, white); }
+.entry-preview__text { background-color: var(--body-bg, white); line-height: 1.6; }
 
 .entry-preview:hover .entry-preview__title:before { width: 100%; }
 
@@ -1183,7 +1187,7 @@ body.drawer-open .drawer .drawer__panel { transform: translateX(0%); }
 
 .a-block--loaded { margin-bottom: 20px; }
 
-.a-block--loaded[data-a-name="inPost"] { margin-top: 20px; }
+.a-block--loaded[data-a-name="inPost"], .a-block--loaded[data-a-name="inFooter"] { margin-top: 20px; }
 
 .text-left { text-align: left; }
 

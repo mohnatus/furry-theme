@@ -12,6 +12,16 @@
 
   display: flex;
   align-items: center;
+
+  a {
+    &:hover {
+      color: hsl(var(--accent-color-hue), 30%, 40%);
+    }
+
+    svg {
+      fill: currentColor;
+    }
+  }
 }
 
 .page-title {
