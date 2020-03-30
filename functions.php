@@ -51,6 +51,8 @@ function furry_scripts() {
   }
 }
 function furry_async_scripts($tag, $handle) {
+  if(is_admin()) return $tag;
+  
   $sync = [];
   if (!in_array($handle, $sync)) {
     return str_replace(' src', ' async src', $tag);
