@@ -1,6 +1,6 @@
 import { node } from '../utils/dom';
 
-const { client, config } = window.adata.google;
+const { client, config } = window.adata ? window.adata.google : {};
 
 const className = 'a-block';
 const loadedClassName = 'a-block--loaded';

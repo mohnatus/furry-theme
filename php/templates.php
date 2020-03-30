@@ -2,9 +2,9 @@
 
 /** Thumbnails */
 add_theme_support('post-thumbnails');
-add_image_size('preview-1x', 400, 200, false);
-add_image_size('preview-2x', 800, 400, false);
-add_image_size('preview-3x', 1200, 600, false);
+add_image_size('preview-1x', 400, 200, true);
+add_image_size('preview-2x', 800, 400, true);
+add_image_size('preview-3x', 1200, 600, true);
 function furry_preview_img($post) {
   $postId = $post->ID;
   $postExcerpt = $post->excerpt;
@@ -97,3 +97,88 @@ function furry_pagination_template($template, $class){
 add_action( 'admin_bar_init', function() {
   remove_action( 'wp_head', '_admin_bar_bump_cb' );
 });
+
+/** Webp */
+add_filter('wp_generate_attachment_metadata', 'furry_webp_generation');
+function furry_webp_generation($metadata) {
+  $uploads = wp_upload_dir(); // получает папку для загрузки медиафайлов
+
+  $file = $uploads['basedir'] . '/' . $metadata['file']; // получает исходный файл
+  $ext = wp_check_filetype($file); // получает расширение файла
+
+  if ( $ext['type'] == 'image/jpeg' ) { // в зависимости от расширения обрабатаывает файлы разными функциями
+      $image = imagecreatefromjpeg($file); // создает изображение из jpg
+
+  } elseif ( $ext['type'] == 'image/png' ){
+      $image = imagecreatefrompng($file); // создает изображение из png
+      imagepalettetotruecolor($image); // восстанавливает цвета
+      imagealphablending($image, false); // выключает режим сопряжения цветов
+      imagesavealpha($image, true); // сохраняет прозрачность
+
+  }
+  imagewebp($image, $uploads['basedir'] . '/' . $metadata['file'] . '.webp', 90);
+
+  foreach ($metadata['sizes'] as $size) {
+      $file = $uploads['url'] . '/' . $size['file'];
+      $ext = $size['mime-type'];
+
+      if ( $ext == 'image/jpeg' ) {
+          $image = imagecreatefromjpeg($file);
+
+      } elseif ( $ext == 'image/png' ){
+          $image = imagecreatefrompng($file);
+          imagepalettetotruecolor($image);
+          imagealphablending($image, false);
+          imagesavealpha($image, true);
+      }
+
+      imagewebp($image, $uploads['basedir'] . $uploads['subdir'] . '/' . $size['file'] . '.webp', 90);
+  }
+  return $metadata;
+}
+
+
+add_filter('the_content', 'furry_wrap_images');
+function furry_wrap_images($content) {
+  if (is_admin()) return $content;
+  $content = mb_convert_encoding($content, 'HTML-ENTITIES', 'utf-8');
+  $dom = new DOMDocument();
+  libxml_use_internal_errors(true);
+  $dom->loadHTML($content);
+  libxml_clear_errors();
+
+
+  $pictureTmp = $dom->createElement('picture');
+  $sourceTmp = $dom->createElement('source');
+
+  $images = $dom->getElementsByTagName('img');
+
+  foreach ($images as $img) {
+      $picture = $pictureTmp->cloneNode();
+      $picture->setAttribute('class', 'picture');
+
+      $webpSource = $sourceTmp->cloneNode();
+      $webpSource->setAttribute('type', 'image/webp');
+
+      $img->parentNode->replaceChild($picture, $img);
+      $picture->appendChild($webpSource);
+      $picture->appendChild($img);
+
+      $imgSrc = $img->getAttribute('src');
+      $imgSrcWebp = $imgSrc . '.webp';
+
+
+      $img->setAttribute("data-src", $imgSrc);
+      $img->removeAttribute("src");
+
+      var_dump($img->getAttribute('srcset'));
+      $webpSource->setAttribute("data-srcset", $imgSrcWebp);
+
+      if (file_exists($imgSrcWebp)) {
+        $webpSource->setAttribute("data-srcset", $imgSrcWebp);
+      }
+  }
+
+  $html = $dom->saveHTML();
+  return $html;
+}
