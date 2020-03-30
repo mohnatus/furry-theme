@@ -51,8 +51,8 @@ function furry_scripts() {
   }
 }
 function furry_async_scripts($tag, $handle) {
-  $async = ['app', 'entry', 'advert'];
-  if (in_array($handle, $async)) {
+  $sync = [];
+  if (!in_array($handle, $sync)) {
     return str_replace(' src', ' async src', $tag);
   }
   return $tag;

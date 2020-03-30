@@ -1,5 +1,6 @@
-import { client, config } from './data';
 import { node } from '../utils/dom';
+
+const { client, config } = window.adata.google;
 
 const className = 'a-block';
 const loadedClassName = 'a-block--loaded';
@@ -21,7 +22,7 @@ export function ABlock(el, name) {
   const ins = node('ins', attrs);
   el.appendChild(ins);
 
-  return {
+  const aBlock = {
     el,
     set loaded(value) {
       el.classList.toggle(loadedClassName, value);
@@ -32,4 +33,7 @@ export function ABlock(el, name) {
         el.innerHTML = '<span>Пожалуйста, не блокируйте рекламу :(</span>';
     },
   };
+
+  el.aBlock = aBlock;
+  return aBlock;
 }

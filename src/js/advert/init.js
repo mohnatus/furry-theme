@@ -1,6 +1,8 @@
 import { ABlock } from "./ablock";
 import { script, node } from "../utils/dom";
-import { url } from "./data";
+import { registerObserver } from "../observer";
+
+const url = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
 
 function isSingular() {
   return document.body.classList.contains('single') || document.body.classList.contains('page');
@@ -37,34 +39,34 @@ function setBottom() {
 }
 
 export function ASet() {
-  // if (isSingular()) {
-  //   setInPost();
-  // } else {
-  //   setTop();
-  // }
-
-  setBottom();
-
-  AInit();
-}
-
-export function AInit() {
-  const blocks = [...document.querySelectorAll('[data-a-block]')];
-  if (!blocks.length) return;
+  if (!window.adata || !window.adata.google) return;
+  const googleData = window.adata.google;
+  const blocks = googleData.blocks|| {};
 
   window.adsbygoogle = window.adsbygoogle || [];
-  const aBlocks = blocks.map(b => {
+  const loading = new Promise((res, rej) => {
+    const s = script(url, res, rej);
+    document.body.appendChild(s);
+  });
+
+  if (isSingular()) {
+    if (blocks.inPost) setInPost();
+    else if (blocks.header) setTop();
+  } else {
+    if (blocks.header) setTop();
+  }
+
+  if (blocks.footer) setBottom();
+
+  registerObserver('[data-a-block]', (b) => {
     const name = b.dataset.aName;
     if (!name) return;
 
     const aBlock = ABlock(b, name);
     window.adsbygoogle.push({});
-    return aBlock;
-  });
 
-  script(url, () => {
-    aBlocks.forEach(b => b.loaded = true);
-  }, () => {
-    aBlocks.forEach(b => b.error = true);
+    loading
+      .then(() => aBlock.loaded = true)
+      .catch(() => aBlock.error = true);
   })
 }

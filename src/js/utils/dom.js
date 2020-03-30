@@ -13,5 +13,5 @@ export function script(src, onLoad, onError) {
   s.src = src;
   s.onload = onLoad;
   s.onerror = onError;
-  document.body.appendChild(s);
+  return s;
 }
