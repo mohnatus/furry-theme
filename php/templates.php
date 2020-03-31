@@ -2,92 +2,104 @@
 
 /** Thumbnails */
 add_theme_support('post-thumbnails');
-add_image_size('preview-1x', 400, 200, true);
-add_image_size('preview-2x', 800, 400, true);
-add_image_size('preview-3x', 1200, 600, true);
+add_image_size('preview-sm', 350, 175, true);
+add_image_size('preview-md', 500, 250, true);
+add_image_size('preview-lg', 800, 400, true);
+
+function furry_get_preview_sizes() {
+  return '(max-width: 575px) calc(100vw - 40px),
+          (max-width: 767px) calc(100vw - 40px - 6.5em),
+          (max-width: 991px) calc(50vw - 20px - 2.5em),
+          (max-width: 1199px) calc(50vw - 20px - 6.5em),
+          (max-width: 1200px) calc(35vw - 15px - 2.5em),
+          (max-width: 1300px) 500px,
+          500px';
+}
+
+
+function furry_get_preview_srcset($sm, $md, $lg) {
+  return "$sm 350w, $md 500w, $lg 800w";
+}
+
+function furry_default_preview($alt) {
+  $previewPath = get_template_directory_uri() . '/assets/img';
+
+  $previewSm = "{$previewPath}/preview-default-sm.png";
+  $previewMd = "{$previewPath}/preview-default-md.png";
+  $previewLg = "{$previewPath}/preview-default-lg.png";
+
+  $srcset = furry_get_preview_srcset($previewSm, $previewMd, $previewLg);
+  $sizes = furry_get_preview_sizes();
+
+  echo "<img alt='$alt'
+          data-src='$previewMd'
+          data-srcset='$srcset'
+          sizes='$sizes'>";
+}
 
 function furry_preview_img($post) {
   $postId = $post->ID;
   $postExcerpt = $post->excerpt;
-
-  $postThumbnailUrlFull = get_the_post_thumbnail_url($postId, 'full');
-
-  if (!$postThumbnailUrlFull) {
-    $previewPath = get_template_directory_uri() . '/assets/img';
-    $previewWebp = "{$previewPath}/preview-default-3x.webp";
-    $preview1x = "{$previewPath}/preview-default-1x.png";
-    $preview2x = "{$previewPath}/preview-default-2x.png";
-    $preview3x = "{$previewPath}/preview-default-3x.png";
-
-    return "<picture>
-      <source type='image/webp'
-        data-srcset='$previewWebp'>
-      <source media='(max-width: 420px)'
-        data-srcset='$preview1x'>
-
-      <source media='(max-width: 767px)'
-        data-srcset='$preview2x'>
-
-      <source
-        data-srcset='$preview1x'>
-
-      <img data-src='$preview1x' alt='$postExcerpt'>
-    </picture>";
+  if (!has_post_thumbnail($postId)) {
+    return furry_default_preview($postExcerpt);
   }
 
-  $postThumbnailUrl1x = get_the_post_thumbnail_url($postId, 'preview-1x');
-  $postThumbnailUrl2x = get_the_post_thumbnail_url($postId, 'preview-2x');
-  $postThumbnailUrl3x = get_the_post_thumbnail_url($postId, 'preview-3x');
+  $sizes = furry_get_preview_sizes();
 
-  $postThumbnailUrlWebp1x = '';
+  $postThumbnailUrlSm = get_the_post_thumbnail_url($postId, 'preview-sm');
+  $postThumbnailUrlMd = get_the_post_thumbnail_url($postId, 'preview-md');
+  $postThumbnailUrlLg = get_the_post_thumbnail_url($postId, 'preview-lg');
+  $srcset = furry_get_preview_srcset($postThumbnailUrlSm, $postThumbnailUrlMd, $postThumbnailUrlLg);
 
-  return "<picture>
-    <source media='(max-width: 420px)'
-      data-srcset='$postThumbnailUrl1x'>
-
-    <source media='(max-width: 767px)'
-      data-srcset='$postThumbnailUrl2x'>
-
-    <source
-      data-srcset='$postThumbnailUrl1x'>
-
-    <img data-src='$postThumbnailUrl1x' alt='$postExcerpt'>
-  </picture>";
+  echo "<img alt='$postExcerpt'
+    data-src='$postThumbnailUrlMd'
+    data-srcset='$srcset'
+    sizes='$sizes'>";
 }
-function furry_entry_img($post) {
-  $postID = $post->ID;
-  $postExcerpt = $post->excerpt;
 
-  $postThumbnailUrl1x = get_the_post_thumbnail_url($postId, 'preview-1x');
-  $postThumbnailUrl2x = get_the_post_thumbnail_url($postId, 'preview-2x');
-  $postThumbnailUrl3x = get_the_post_thumbnail_url($postId, 'preview-3x');
-  $postThumbnailUrlFull = get_the_post_thumbnail_url($postId, 'full');
+function furry_banner_img() {
+  $path = get_template_directory_uri() . '/assets/img';
 
-  return "<picture>
-    <source media='(max-width: 420px)'
-      data-srcset='$postThumbnailUrl1x'>
+  $bannerXl = "$path/banner-xl.jpg"; // 1920
+  $bannerLg = "$path/banner-lg.jpg"; // 1200
+  $bannerMd = "$path/banner-md.jpg"; // 1000
+  $bannerSm = "$path/banner-sm.jpg"; // 800
+  $bannerXs = "$path/banner-xs.jpg"; // 530
 
-    <source media='(max-width: 820px)'
-      data-srcset='$postThumbnailUrl2x'>
 
-    <source
-      data-srcset='$postThumbnailUrlFull'>
+  echo "<img alt='' data-src='$bannerXl'
+        data-srcset='$bannerXs 530w, $bannerSm 800w, $bannerMd 1000w, $bannerLg 1200w, $bannerXl 1920w'
+        sizes='100vw'>";
+}
 
-    <img data-src='$postThumbnailUrl1x' alt='$postExcerpt'>
-  </picture>";
+/** Lazy load */
+add_filter('the_content', 'furry_lazy_load');
+function furry_lazy_load($content) {
+  $dom = new DOMDocument();
+  $content = mb_convert_encoding($content, 'HTML-ENTITIES', 'utf-8');
+  libxml_use_internal_errors(true);
+  $dom->loadHtml($content);
+  libxml_use_internal_errors(false);
+
+  $images = $dom->getElementsByTagName('img');
+
+  foreach($images as $img) {
+    $src = $img->getAttribute('src');
+    $srcset = $img->getAttribute('srcset');
+
+    $img->removeAttribute('src');
+    $img->removeAttribute('srcset');
+
+    $img->setAttribute('data-srcset', $srcset);
+    $img->setAttribute('data-src', $src);
+  }
+
+	return $dom->saveHTML();
 }
 
 /** Pagination */
 add_filter('navigation_markup_template', 'furry_pagination_template', 10, 2);
 function furry_pagination_template($template, $class){
-	/*
-	Вид базового шаблона:
-	<nav class="navigation %1$s" role="navigation">
-		<h2 class="screen-reader-text">%2$s</h2>
-		<div class="nav-links">%3$s</div>
-	</nav>
-	*/
-
 	return '
 	<nav class="navigation %1$s" role="navigation">
 		<div class="nav-links">%3$s</div>
@@ -99,55 +111,3 @@ function furry_pagination_template($template, $class){
 add_action( 'admin_bar_init', function() {
   remove_action( 'wp_head', '_admin_bar_bump_cb' );
 });
-
-/** Webp */
-function furry_content() {
-  $content = get_the_content();
-  $content = furry_wrap_images($content);
-  echo $content;
-}
-function furry_wrap_images($content) {
-  $content = mb_convert_encoding($content, 'HTML-ENTITIES', 'utf-8');
-  $dom = new DOMDocument();
-  libxml_use_internal_errors(true);
-  $dom->loadHTML($content);
-  libxml_clear_errors();
-
-  $images = $dom->getElementsByTagName('img');
-  $sources = $dom->getElementsByTagName('source');
-
-  foreach ($images as $img) {
-      $imgSrc = $img->getAttribute('src');
-      $img->setAttribute("alt", 'test');
-      if (is_user_logged_in()) {
-        var_dump($imgSrc);
-      }
-      // $img->removeAttribute("src");
-
-      // var_dump($img->getAttribute('srcset'));
-      // $webpSource->setAttribute("data-srcset", $imgSrcWebp);
-
-      // if (file_exists($imgSrcWebp)) {
-      //   $webpSource->setAttribute("data-srcset", $imgSrcWebp);
-      // }
-  }
-
-  foreach ($sources as $img) {
-    $imgSrc = $img->getAttribute('src');
-    $img->setAttribute("alt", 'test');
-    if (is_user_logged_in()) {
-      var_dump($imgSrc);
-    }
-    // $img->removeAttribute("src");
-
-    // var_dump($img->getAttribute('srcset'));
-    // $webpSource->setAttribute("data-srcset", $imgSrcWebp);
-
-    // if (file_exists($imgSrcWebp)) {
-    //   $webpSource->setAttribute("data-srcset", $imgSrcWebp);
-    // }
-}
-
-  // $html = $dom->saveHTML();
-  return $content;
-}
