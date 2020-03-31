@@ -1,3 +1,4 @@
+import { onKeyDown, ESCAPE_KEY } from "./utils/keyboard";
 
 const drawerOpenClass = 'drawer-open';
 const body = document.body;
@@ -25,5 +26,9 @@ export function Drawer() {
 
   drawerClosers.forEach((c) => {
     c.addEventListener('click', closeMenu);
+  });
+
+  onKeyDown(ESCAPE_KEY, () => {
+    closeMenu();
   })
 }

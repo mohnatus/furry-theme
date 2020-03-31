@@ -38,3 +38,7 @@
 @include extra-large-and-up {
   @include textHelpers('-xl');
 }
+
+.overflow-hidden {
+  overflow: hidden;
+}
