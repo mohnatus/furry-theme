@@ -1,8 +1,15 @@
 <div class="page-banner">
+  <?php /*
   <div class="page-banner__img" data-style="background-image: url(<?= get_template_directory_uri().'/assets/img/banner.jpg' ?>); background-image: url(<?= get_template_directory_uri().'/assets/img/banner.webp' ?>)"></div>
+  */ ?>
+
+  <div class="page-banner__img">
+    <?php furry_banner_img() ?>
+  </div>
+
   <div class="page-banner__content text-center d-flex align-center">
 
-  <?php if (is_search()): ?>
+    <?php if (is_search()): ?>
       <div class="container my-2">
         <h1 class="h0">
           <div class="page-banner__supheader text-uppercase">
