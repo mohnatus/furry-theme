@@ -54,7 +54,7 @@ function createTitle(className) {
 
 export function ContentList() {
   const headers = getHeaders();
-  headers.forEach(h => {
+  headers.forEach((h) => {
     h.el.insertAdjacentElement('afterbegin', createAnchor(h.id));
   });
 
@@ -65,10 +65,7 @@ export function ContentList() {
     const list = headers.reduce((acc, h) => {
       if (h.root) {
         const { id, text } = h;
-        return [
-          ...acc,
-          { id, text, items: [] }
-        ];
+        return [...acc, { id, text, items: [] }];
       }
 
       if (oneLevelList) return acc;
@@ -79,9 +76,7 @@ export function ContentList() {
       const { id, text } = h;
       root.items.push({ id, text });
       return acc;
-
     }, []);
-
 
     const title = createTitle('contentlist__title');
     contentList.appendChild(title);

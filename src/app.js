@@ -17,20 +17,10 @@ registerObserver('[data-srcset]',function(target) {
   target.removeAttribute('data-srcset');
 })
 
-registerObserver('[data-background]', function(target) {
-  target.style.backgroundImage = "url(" + target.dataset.background + ")";
-  target.removeAttribute('data-background');
-})
-
-registerObserver('[data-style]', function(target) {
-  target.setAttribute('style', target.dataset.style);
-  target.removeAttribute('data-style');
-})
-
 registerObserver('.entry-preview.transformed', function(target) {
   target.classList.remove('transformed');
 }, {
-  rootMargin: '-250px'
+  rootMargin: '-150px'
 });
 
 onLoad(loadAsyncStyles);

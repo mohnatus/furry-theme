@@ -1,9 +1,12 @@
-export function node(tag, attrs = {}, children = []) {
+export function node(tag, attrs = {}, children = [], html = '') {
   const n = document.createElement(tag);
-  Object.keys(attrs).forEach(k => {
-    n.setAttribute(k, attrs[k]);
-  });
-  children.forEach(c => n.appendChild(c));
+  if (attrs) {
+    Object.keys(attrs).forEach(k => {
+      n.setAttribute(k, attrs[k]);
+    });
+  }
+  if (children) children.forEach(c => n.appendChild(c));
+  if (html) n.innerHTML = html;
   return n;
 }
 

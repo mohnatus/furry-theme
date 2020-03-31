@@ -1,20 +1,25 @@
 /* A-blocks */
 .a-block {
   overflow: hidden;
-}
+  text-align: center;
 
-.a-block--error {
-  font-size: 0.875rem;
-  padding: 10px 0;
-  color: rgba(0, 0, 0, 0.5);
-  text-align: right;
-}
+  &--loading {
+    padding: 10px 0;
+  }
 
-.a-block--loaded {
-  margin-bottom: 20px;
+  &--error {
+    font-size: 0.875rem;
+    padding: 10px 0;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: right;
+  }
 
-  &[data-a-name="inPost"],
-  &[data-a-name="footer"] {
-    margin-top: 20px;
+  &--loaded {
+    margin-bottom: 20px;
+
+    &[data-a-name="inPost"],
+    &[data-a-name="footer"] {
+      margin-top: 20px;
+    }
   }
 }
