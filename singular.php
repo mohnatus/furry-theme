@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <?php
-  $sidebarVisible = is_active_sidebar('main-sidebar');
+  $sidebarVisible = is_active_sidebar('main-sidebar') || get_post_meta( $post->ID, 'postwidget_visible', true);
   $contentClasses = $sidebarVisible ? "col col-12 col-lg-8 col-xl-9" :  "col col-12";
 ?>
 
@@ -46,6 +46,7 @@
             <?php the_content(); ?>
           </div>
           <?php get_template_part('content/entry', 'source'); ?>
+          <?php get_template_part('content/entry', 'related'); ?>
 
           <footer class="entry__footer mt-6">
             <div class="entry__meta">
@@ -112,9 +113,7 @@
 
     <?php if ($sidebarVisible): ?>
       <div class="col col-12 col-lg-4 col-xl-3">
-        <aside class="page-sidebar">
-          <?php dynamic_sidebar('main-sidebar'); ?>
-        </aside>
+        <?php get_template_part('content/sidebar', 'entry'); ?>
       </div>
     <?php endif; ?>
   </div>
