@@ -13,7 +13,7 @@
     $pagemetaDescription = get_post_meta($post->ID, 'pagemeta_description', true);
     $pagemetaKeywords = get_post_meta($post->ID, 'pagemeta_keywords', true);
 
-    $thumbnail = get_the_post_thumbnail_url('full');
+    $thumbnail = get_the_post_thumbnail_url($post->ID, 'full');
 
     $pageTitle = $pagemetaTitle ? $pagemetaTitle : get_the_title();
     $pageDescription = $pagemetaDescription ? $pagemetaDescription : get_the_excerpt();
@@ -28,10 +28,10 @@
 <meta name="description" content="<?= $pageDescription ?>">
 <meta name="keywords" content="<?= $pageKeywords ?>">
 
-<meta name="og:title" content="<?= $pageTitle ?>">
-<meta name="og:type" content="<?= $pageType ?>">
-<meta name="og:image" content="<?= $pageImage ?>">
-<meta name="og:url" content="<?= home_url().$_SERVER['REQUEST_URI'] ?>">
-<meta name="og:description" content="<?= $pageDescription ?>">
-<meta name="og:locale" content="ru-RU">
-<meta name="og:site_name" content="<?= $siteName ?>">
+<meta property="og:title" content="<?= $pageTitle ?>">
+<meta property="og:type" content="<?= $pageType ?>">
+<meta property="og:image" content="<?= $pageImage ?>">
+<meta property="og:url" content="<?= home_url().$_SERVER['REQUEST_URI'] ?>">
+<meta property="og:description" content="<?= $pageDescription ?>">
+<meta property="og:locale" content="ru-RU">
+<meta property="og:site_name" content="<?= $siteName ?>">
