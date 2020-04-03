@@ -24,7 +24,12 @@
   }
 ?>
 
-<title><?= $pageTitle.$separator.$siteName ?></title>
+<?php if (is_home()): ?>
+  <title><?= $siteName ?></title>
+<?php else: ?>
+  <title><?= $pageTitle.$separator.$siteName ?></title>
+<?php endif; ?>
+
 <meta name="description" content="<?= $pageDescription ?>">
 <meta name="keywords" content="<?= $pageKeywords ?>">
 

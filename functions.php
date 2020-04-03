@@ -24,6 +24,7 @@ function register_my_widgets(){
 	) );
 }
 
+
 /** Scripts */
 add_action('wp_enqueue_scripts', 'furry_scripts');
 add_filter('script_loader_tag', 'furry_async_scripts', 10, 2);
@@ -52,7 +53,7 @@ function furry_scripts() {
 }
 function furry_async_scripts($tag, $handle) {
   if(is_admin()) return $tag;
-  
+
   $sync = [];
   if (!in_array($handle, $sync)) {
     return str_replace(' src', ' async src', $tag);
@@ -173,4 +174,5 @@ require_once('php/utils.php');
 require_once('php/comments.php');
 require_once('php/templates.php');
 require_once('php/meta.php');
+require_once('php/taxonomies.php');
 require_once('php/admin.php');

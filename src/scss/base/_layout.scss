@@ -7,7 +7,12 @@ body {
 }
 
 .page-sidebar {
-  position: sticky;
+  height: 100%;
+  min-width: 250px;
 
-  @include with-adminbar('top', 10px);
+  &__sticky {
+    position: sticky;
+    top: 10px;
+    @include with-adminbar('top', 10px);
+  }
 }

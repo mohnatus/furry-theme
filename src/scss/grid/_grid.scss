@@ -13,11 +13,46 @@
 
   display: flex;
   flex-wrap: wrap;
+
+  &-nowrap {
+    flex-wrap: nowrap;
+  }
+
+  @include small-and-up {
+    &-sm-nowrap {
+      flex-wrap: nowrap;
+    }
+  }
+
+  @include medium-and-up {
+    &-md-nowrap {
+      flex-wrap: nowrap;
+    }
+  }
+
+  @include large-and-up {
+    &-lg-nowrap {
+      flex-wrap: nowrap;
+    }
+  }
+
+  @include extra-large-and-up {
+    &-xl-nowrap {
+      flex-wrap: nowrap;
+    }
+  }
 }
 
 .col {
   padding-left: $gap / 2;
   padding-right: $gap / 2;
+  max-width: 100%;
+
+  &-full {
+    width: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
 
   @for $i from 1 through $columnsCount {
     &-#{$i} {

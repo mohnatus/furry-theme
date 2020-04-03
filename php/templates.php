@@ -16,7 +16,6 @@ function furry_get_preview_sizes() {
           500px';
 }
 
-
 function furry_get_preview_srcset($sm, $md, $lg) {
   return "$sm 350w, $md 500w, $lg 800w";
 }
@@ -72,9 +71,25 @@ function furry_banner_img() {
         sizes='100vw'>";
 }
 
+function furry_sidebar_banner_img($banner) {
+  $bannerId = $banner->term_id;
+  $bannerImageId = get_term_meta( $bannerId, 'term_image_id', 1 );
+  $bannerImageUrlSm = wp_get_attachment_image_url( $bannerImageId, 'preview-sm' );
+  $bannerImageUrlMd = wp_get_attachment_image_url( $bannerImageId, 'preview-md' );
+  $bannerImageUrlLg = wp_get_attachment_image_url( $bannerImageId, 'preview-lg' );
+  $srcset = furry_get_preview_srcset($bannerImageUrlSm, $bannerImageUrlMd, $bannerImageUrlLg);
+  $sizes = '(max-width: 1199px) 100vw, 320px';
+  echo "<img alt=''
+    data-src='$bannerImageUrlMd'
+    data-srcset='$srcset'
+    sizes='$sizes'>";
+}
+
 /** Lazy load */
 add_filter('the_content', 'furry_lazy_load');
 function furry_lazy_load($content) {
+  if (is_admin()) return $content;
+
   $dom = new DOMDocument();
   $content = mb_convert_encoding($content, 'HTML-ENTITIES', 'utf-8');
   libxml_use_internal_errors(true);

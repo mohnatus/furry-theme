@@ -24,7 +24,7 @@ function furry_settings_init() {
   );
   add_settings_field(
 		'analytics_body_bottom',
-		'Код внизу body',
+		'Код внизу body (скрыт от незарегистрированных)',
 		'analytics_body_bottom_callback_function',
     'analytics',
     'analytics_code'

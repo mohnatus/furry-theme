@@ -169,6 +169,10 @@ function postwidget_meta_box($post) {
 }
 
 function furry_meta_box_update($metaBoxName, $postId) {
+  if (!isset($_POST[$metaBoxName])) {
+    return false;
+  }
+
   $metaBox = $_POST[$metaBoxName];
   if (
     empty($metaBox)

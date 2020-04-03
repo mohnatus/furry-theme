@@ -1,15 +1,10 @@
 <?php get_header(); ?>
 
-<?php
-  $sidebarVisible = is_active_sidebar('main-sidebar') || get_post_meta( $post->ID, 'postwidget_visible', true);
-  $contentClasses = $sidebarVisible ? "col col-12 col-lg-8 col-xl-9" :  "col col-12";
-?>
-
 <div class="container">
 
-  <div class="row">
+  <div class="row row-lg-nowrap">
 
-    <div class="<?= $contentClasses ?>">
+    <div class="col col-full overflow-hidden">
       <main class="page-main content-width mx-auto"  class="entry" itemscope itemtype="http://schema.org/Article">
 
         <?php the_post(); ?>
@@ -111,11 +106,11 @@
       </main>
     </div>
 
-    <?php if ($sidebarVisible): ?>
-      <div class="col col-12 col-lg-4 col-xl-3">
-        <?php get_template_part('content/sidebar', 'entry'); ?>
-      </div>
-    <?php endif; ?>
+
+
+    <?php get_template_part('content/sidebar', 'entry'); ?>
+
+
   </div>
 
 </div>
