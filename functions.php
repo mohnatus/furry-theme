@@ -37,16 +37,6 @@ function furry_scripts() {
     'in_footer'
   );
 
-  if (is_singular()) {
-    wp_enqueue_script(
-      'entry',
-      get_template_directory_uri() . '/assets/js/entry.js',
-      array(),
-      filemtime(get_theme_file_path('assets/js/entry.js')),
-      'in_footer'
-    );
-  }
-
   if ( !is_admin() ) {
     wp_deregister_script('jquery');
   }

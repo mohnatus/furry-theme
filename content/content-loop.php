@@ -2,6 +2,8 @@
 
 if(have_posts()): ?>
 
+  <?= do_shortcode('[ga-block id="header"]'); ?>
+
   <div class="row">
 
     <?php while(have_posts()):
