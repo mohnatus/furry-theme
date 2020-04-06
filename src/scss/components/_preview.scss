@@ -1,10 +1,17 @@
 .entry-preview {
-  transition: transform ease-in-out $transitionDurationLong;
-  position: relative;
 
-  &.transformed {
-    transform: perspective(1000px) rotateY(-20deg);
+  position: relative;
+  overflow: hidden;
+
+  &__link {
+    transition: transform ease-in-out $transitionDurationLong;
+
+    &.transformed {
+      transform: perspective(1000px) rotateY(-20deg);
+    }
   }
+
+
 
   &__img {
     display: block;

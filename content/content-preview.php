@@ -1,4 +1,4 @@
-<article class="entry-preview px-sm-6 px-md-4 px-lg-6 px-xl-4 mb-6 transformed">
+<article class="entry-preview px-sm-6 px-md-4 px-lg-6 px-xl-4 mb-6">
   <?php
     $postPermalink = get_permalink();
     $postExcerpt = get_the_excerpt();
@@ -6,7 +6,7 @@
     //$postThumbnailSrcset = wp_get_attachment_image_srcset($postThumbnailId);
   ?>
 
-  <a href="<?= $postPermalink ?>" class="d-block nolink entry-preview__link">
+  <a href="<?= $postPermalink ?>" class="d-block nolink entry-preview__link transformed">
     <div class="entry-preview__img">
       <?= furry_preview_img($post); ?>
     </div>
