@@ -5,9 +5,7 @@ add_action('save_post', 'furry_meta_update', 0);
 
 $metaboxes = [
   'source' => 'Оригинал статьи',
-  'contentlist' => 'Блок Содержание статьи',
   'pagemeta' => 'Мета-данные статьи',
-  'postwidget' => 'Виджет в сайдбаре'
 ];
 
 function furry_meta_boxes() {
@@ -62,31 +60,6 @@ function source_meta_box($post) {
   <?php
 }
 
-function contentlist_meta_box($post) {
-  $postId = $post->ID;
-  $needContentlist = get_post_meta($postId, 'contentlist_need', 1);
-  $oneLevelContentlist = get_post_meta($postId, 'contentlist_one_level', 1);
-  ?>
-    <div class="form-group" style="margin: 20px 0">
-      <input type="hidden" name="contentlist[need]" value="" />
-      <input type="checkbox" name="contentlist[need]" value="1"
-        id="contentlist-need"
-        <?php checked($needContentlist, 1)?> />
-      <label for="contentlist-need">Создать блок Содержание статьи</label>
-    </div>
-
-    <div class="form-group" style="margin: 20px 0">
-      <input type="hidden" name="contentlist[one_level]" value="" />
-      <input type="checkbox" name="contentlist[one_level]" value="1"
-        id="contentlist-onelevel"
-        <?php checked($oneLevelContentlist, 1)?> />
-      <label for="contentlist-onelevel">Вывести только первый уровень заголовков</label>
-    </div>
-
-    <input type="hidden" name="contentlist_nonce" value="<?php echo wp_create_nonce(__FILE__); ?>" />
-  <?php
-}
-
 function pagemeta_meta_box($post) {
   $postId = $post->ID;
   $metaTitle = get_post_meta($postId, 'pagemeta_title', 1);
@@ -114,57 +87,6 @@ function pagemeta_meta_box($post) {
 
 
     <input type="hidden" name="pagemeta_nonce" value="<?php echo wp_create_nonce(__FILE__); ?>" />
-  <?php
-}
-
-function postwidget_meta_box($post) {
-  $postId = $post->ID;
-  $postwidgetVisible = get_post_meta($postId, 'postwidget_visible', 1);
-  $postwidgetTitle = get_post_meta($postId, 'postwidget_title', 1);
-  $postwidgetDescription = get_post_meta($postId, 'postwidget_description', 1);
-  $postwidgetLink = get_post_meta($postId, 'postwidget_link', 1);
-  $postwidgetImage = get_post_meta($postId, 'postwidget_image', 1);
-  $postwidgetClasses = get_post_meta($postId, 'postwidget_classes', 1);
-  ?>
-    <div class="form-group" style="margin: 20px 0">
-      <input type="hidden" name="postwidget[visible]" value="" />
-      <input type="checkbox" name="postwidget[visible]" value="1"
-        id="postwidget-visible"
-        <?php checked($postwidgetVisible, 1)?> />
-      <label for="postwidget-visible">Показать виджет в сайдбаре</label>
-    </div>
-
-    <div class="form-group" style="margin: 20px 0">
-      <label for="postwidget-title">Заголовок</label>
-      <br>
-      <input type="text" id="postwidget-title" name="postwidget[title]" value="<?= $postwidgetTitle ?>" style="width: 100%">
-    </div>
-
-    <div class="form-group" style="margin: 20px 0">
-      <label for="postwidget-description">Описание</label>
-      <br>
-      <input type="text" id="postwidget-description" name="postwidget[description]" value="<?= $postwidgetDescription ?>" style="width: 100%">
-    </div>
-
-    <div class="form-group" style="margin: 20px 0">
-      <label for="postwidget-link">Ссылка</label>
-      <br>
-      <input type="text" id="postwidget-link" name="postwidget[link]" value="<?= $postwidgetLink ?>" style="width: 100%">
-    </div>
-
-    <div class="form-group" style="margin: 20px 0">
-      <label for="postwidget-image">Изображение</label>
-      <br>
-      <input type="text" id="postwidget-image" name="postwidget[image]" value="<?= $postwidgetImage ?>" style="width: 100%">
-    </div>
-
-    <div class="form-group" style="margin: 20px 0">
-      <label for="postwidget-classes">Классы для блока</label>
-      <br>
-      <input type="text" id="postwidget-classes" name="postwidget[classes]" value="<?= $postwidgetClasses ?>" style="width: 100%">
-    </div>
-
-    <input type="hidden" name="postwidget_nonce" value="<?php echo wp_create_nonce(__FILE__); ?>" />
   <?php
 }
 

@@ -35,8 +35,6 @@
             </div>
           </header>
 
-          <?php get_template_part('content/entry', 'contentlist'); ?>
-
           <div class="entry__content ugc" itemprop="articleBody">
             <?php the_content(); ?>
           </div>
