@@ -2,7 +2,13 @@
 
 if(have_posts()): ?>
 
-  <?= do_shortcode('[ga-block id="header"]'); ?>
+  <?php
+    if (is_active_sidebar('before-loop-sidebar')) {
+      ?>
+        <?php dynamic_sidebar('before-loop-sidebar'); ?>
+      <?php
+    }
+  ?>
 
   <div class="row">
 
@@ -20,6 +26,14 @@ if(have_posts()): ?>
     'prev_text' => '<svg width="12" height="12"><use xlink:href="#prev-icon" href="#prev-icon"></svg>',
     'next_text' => '<svg width="12" height="12"><use xlink:href="#next-icon" href="#next-icon"></svg>',
   ]); ?>
+
+<?php
+    if (is_active_sidebar('after-loop-sidebar')) {
+      ?>
+        <?php dynamic_sidebar('after-loop-sidebar'); ?>
+      <?php
+    }
+  ?>
 
 <?php
 

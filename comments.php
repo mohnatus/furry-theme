@@ -1,5 +1,13 @@
 <?php $commentsCount = get_comments_number(); ?>
 
+<?php
+  if (is_active_sidebar('before-comments-sidebar')) {
+    ?>
+      <?php dynamic_sidebar('before-comments-sidebar'); ?>
+    <?php
+  }
+?>
+
 <div id="comments" class="comments mt-6">
   <meta itemprop="commentCount" value="<?= $commentsCount ?>">
   <section class="comments__list mb-6">

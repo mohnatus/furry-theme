@@ -59,6 +59,14 @@
 
       </div>
       <?php get_template_part('content/banner'); ?>
+
+      <?php
+        if (is_active_sidebar('after-header-sidebar')) {
+          ?>
+            <?php dynamic_sidebar('after-header-sidebar'); ?>
+          <?php
+        }
+      ?>
     </header>
 
     <div class="drawer">

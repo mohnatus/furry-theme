@@ -10,7 +10,8 @@ function furry_register_menus() {
 }
 
 /** Sidebars */
-add_action( 'widgets_init', 'register_my_widgets' );
+add_action('widgets_init', 'register_my_widgets');
+add_filter('widget_text', 'do_shortcode');
 function register_my_widgets(){
 	register_sidebar( array(
 		'name'          => 'Main sidebar',
@@ -21,7 +22,57 @@ function register_my_widgets(){
 		'after_widget'  => "</li>\n",
 		'before_title'  => '<h2 class="widgettitle">',
 		'after_title'   => "</h2>\n",
-	) );
+  ) );
+  register_sidebar( array(
+		'name'          => 'Before loop',
+		'id'            => "before-loop-sidebar",
+		'description'   => '',
+		'class'         => 'before-loop-sidebar',
+		'before_widget' => '<div id="%1$s" class="%2$s">',
+		'after_widget'  => "</div>\n",
+		'before_title'  => '<h2 class="widgettitle">',
+		'after_title'   => "</h2>\n",
+  ) );
+  register_sidebar( array(
+		'name'          => 'After loop',
+		'id'            => "after-loop-sidebar",
+		'description'   => '',
+		'class'         => 'after-loop-sidebar',
+		'before_widget' => '<div id="%1$s" class="%2$s">',
+		'after_widget'  => "</div>\n",
+		'before_title'  => '<h2 class="widgettitle">',
+		'after_title'   => "</h2>\n",
+  ) );
+  register_sidebar( array(
+		'name'          => 'After header',
+		'id'            => "after-header-sidebar",
+		'description'   => '',
+		'class'         => 'after-header-sidebar',
+		'before_widget' => '<div id="%1$s" class="%2$s">',
+		'after_widget'  => "</div>\n",
+		'before_title'  => '<h2 class="widgettitle">',
+		'after_title'   => "</h2>\n",
+  ) );
+  register_sidebar( array(
+		'name'          => 'Before footer',
+		'id'            => "before-footer-sidebar",
+		'description'   => '',
+		'class'         => 'before-footer-sidebar',
+		'before_widget' => '<div id="%1$s" class="%2$s">',
+		'after_widget'  => "</div>\n",
+		'before_title'  => '<h2 class="widgettitle">',
+		'after_title'   => "</h2>\n",
+  ) );
+  register_sidebar( array(
+		'name'          => 'Before comments',
+		'id'            => "before-comments-sidebar",
+		'description'   => '',
+		'class'         => 'before-comments-sidebar',
+		'before_widget' => '<div id="%1$s" class="%2$s">',
+		'after_widget'  => "</div>\n",
+		'before_title'  => '<h2 class="widgettitle">',
+		'after_title'   => "</h2>\n",
+  ) );
 }
 
 
