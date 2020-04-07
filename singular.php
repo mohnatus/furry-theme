@@ -40,7 +40,10 @@
           </div>
 
           <?php get_template_part('content/entry', 'source'); ?>
-          <?= do_shortcode("[recommendations id='{$post->ID}']"); ?>
+
+          <?php if (shortcode_exists('recommendations')) {
+            echo do_shortcode("[recommendations id='{$post->ID}']");
+          } ?>
 
           <footer class="entry__footer mt-6">
             <div class="entry__meta">
