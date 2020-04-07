@@ -38,8 +38,9 @@
           <div class="entry__content ugc" itemprop="articleBody">
             <?php the_content(); ?>
           </div>
+
           <?php get_template_part('content/entry', 'source'); ?>
-          <?php get_template_part('content/entry', 'related'); ?>
+          <?= do_shortcode("[recommendations id='{$post->ID}']"); ?>
 
           <footer class="entry__footer mt-6">
             <div class="entry__meta">
