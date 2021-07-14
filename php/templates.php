@@ -38,9 +38,9 @@ function furry_default_preview($alt) {
 
 function furry_preview_img($post) {
   $postId = $post->ID;
-  $postExcerpt = $post->excerpt;
+  $alt = $post->post_title;
   if (!has_post_thumbnail($postId)) {
-    return furry_default_preview($postExcerpt);
+    return furry_default_preview($alt);
   }
 
   $sizes = furry_get_preview_sizes();
@@ -50,7 +50,7 @@ function furry_preview_img($post) {
   $postThumbnailUrlLg = get_the_post_thumbnail_url($postId, 'preview-lg');
   $srcset = furry_get_preview_srcset($postThumbnailUrlSm, $postThumbnailUrlMd, $postThumbnailUrlLg);
 
-  echo "<img alt='$postExcerpt'
+  echo "<img alt='$alt'
     data-src='$postThumbnailUrlMd'
     data-srcset='$srcset'
     sizes='$sizes'>";
@@ -65,8 +65,9 @@ function furry_banner_img() {
   $bannerSm = "$path/banner-sm.jpg"; // 800
   $bannerXs = "$path/banner-xs.jpg"; // 530
 
+  $alt = get_bloginfo('name');
 
-  echo "<img alt='' data-src='$bannerXl'
+  echo "<img alt='$alt' data-src='$bannerXl'
         data-srcset='$bannerXs 530w, $bannerSm 800w, $bannerMd 1000w, $bannerLg 1200w, $bannerXl 1920w'
         sizes='100vw'>";
 }

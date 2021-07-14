@@ -39,12 +39,6 @@
             <?php the_content(); ?>
           </div>
 
-          <?php get_template_part('content/entry', 'source'); ?>
-
-          <?php if (shortcode_exists('recommendations')) {
-            echo do_shortcode("[recommendations id='{$post->ID}']");
-          } ?>
-
           <footer class="entry__footer mt-6">
             <div class="entry__meta">
               <?php $tags = get_the_terms($post->ID, 'post_tag'); ?>

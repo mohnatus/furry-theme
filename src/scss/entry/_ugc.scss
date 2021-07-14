@@ -1,7 +1,8 @@
 .ugc {
   line-height: 1.8;
 
-  ul, ol,
+  ul,
+  ol,
   blockquote,
   pre,
   table {
@@ -39,12 +40,12 @@
   }
 
   figure {
-    table, pre {
+    table,
+    pre {
       margin-left: 0;
       margin-right: 0;
     }
   }
-
 
   figure {
     img {
@@ -55,8 +56,11 @@
     figcaption {
       font-size: 0.75rem;
       color: var(--service-text-color);
+      text-align: center;
 
-      a { color: inherit; }
+      a {
+        color: inherit;
+      }
     }
   }
 
@@ -64,7 +68,8 @@
     font-size: 2rem;
   }
 
-  ul, ol {
+  ul,
+  ol {
     list-style: inside;
 
     li {
@@ -112,7 +117,8 @@
         background-color: var(--service-color);
       }
     }
-    td, th {
+    td,
+    th {
       padding: 10px 15px;
     }
   }
@@ -121,8 +127,11 @@
     background-color: var(--service-color);
     padding: 10px 15px;
     font-family: var(--formatted-font);
-    white-space: pre;
     overflow: auto;
+    max-height: 550px;
+    width: 100%;
+    overflow: auto;
+    white-space: pre-wrap;
   }
 
   code {

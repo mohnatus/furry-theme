@@ -21,6 +21,10 @@
     }
   }
 
+  &__actions a {
+    margin-right: 15px;
+  }
+
   @include medium-and-up() {
     .children {
       & > .comment,
