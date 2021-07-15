@@ -86,33 +86,6 @@ function furry_sidebar_banner_img($banner) {
     sizes='$sizes'>";
 }
 
-/** Lazy load */
-add_filter('the_content', 'furry_lazy_load');
-function furry_lazy_load($content) {
-  if (is_admin()) return $content;
-
-  $dom = new DOMDocument();
-  $content = mb_convert_encoding($content, 'HTML-ENTITIES', 'utf-8');
-  libxml_use_internal_errors(true);
-  $dom->loadHtml($content);
-  libxml_use_internal_errors(false);
-
-  $images = $dom->getElementsByTagName('img');
-
-  foreach($images as $img) {
-    $src = $img->getAttribute('src');
-    $srcset = $img->getAttribute('srcset');
-
-    $img->removeAttribute('src');
-    $img->removeAttribute('srcset');
-
-    $img->setAttribute('data-srcset', $srcset);
-    $img->setAttribute('data-src', $src);
-  }
-
-	return $dom->saveHTML();
-}
-
 /** Pagination */
 add_filter('navigation_markup_template', 'furry_pagination_template', 10, 2);
 function furry_pagination_template($template, $class){
