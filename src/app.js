@@ -3,6 +3,7 @@ import { Drawer } from './js/drawer';
 import { onLoad, onScroll } from './js/utils/onLoad';
 import { loadAsyncStyles } from './js/styles';
 import { AnalyticsTurnOn } from './js/analytics/init';
+import { insertAds } from './js/ads';
 
 Drawer();
 
@@ -23,4 +24,5 @@ registerObserver('.entry-preview .transformed', function(target) {
 });
 
 onLoad(loadAsyncStyles);
+onLoad(insertAds);
 onScroll(AnalyticsTurnOn);
