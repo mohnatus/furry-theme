@@ -1,17 +1,21 @@
 function getHeaders() {
   const content = document.querySelector('.entry__content');
-  const headers = [...content.querySelectorAll('h2, h3')];
+  if (content) {
+    const headers = [...content.querySelectorAll('h2, h3')];
 
-  return headers.map((el) => {
-    const text = el.textContent;
-    const id = text.replace(/[\s-]/g, '_');
-    return {
-      el,
-      root: el.tagName.toUpperCase() === 'H2',
-      text: text,
-      id: id,
-    };
-  });
+    return headers.map((el) => {
+      const text = el.textContent;
+      const id = text.replace(/[\s-]/g, '_');
+      return {
+        el,
+        root: el.tagName.toUpperCase() === 'H2',
+        text: text,
+        id: id
+      };
+    });
+  }
+
+  return [];
 }
 
 function createAnchor(id) {
@@ -60,7 +64,7 @@ export function ContentList() {
 
   const contentList = document.querySelector('[data-contentlist]');
   if (contentList) {
-    contentList.classList.add('contentlist')
+    contentList.classList.add('contentlist');
     const oneLevelList = contentList.hasAttribute('data-root');
 
     const list = headers.reduce((acc, h) => {
@@ -80,13 +84,15 @@ export function ContentList() {
     }, []);
 
     if (contentList.hasAttribute('data-title')) {
-      const title = createTitle('contentlist__title', contentList.dataset.title);
+      const title = createTitle(
+        'contentlist__title',
+        contentList.dataset.title
+      );
       contentList.appendChild(title);
-      title.addEventListener('click', function(e) {
+      title.addEventListener('click', function (e) {
         contentList.classList.toggle('contentlist--closed');
       });
     }
-
 
     contentList.appendChild(createList(list, 'contentlist__root'));
     contentList.classList.add('contentlist--loaded');
