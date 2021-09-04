@@ -1,0 +1,15 @@
+.contentlist {
+  &.contentlist--loaded {
+    margin: 1.5rem 0;
+
+    ul.contentlist__root {
+      margin: 0;
+
+      ul {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        padding-left: 2em;
+      }
+    }
+  }
+}

@@ -45,9 +45,9 @@ function createList(items, className) {
   return list;
 }
 
-function createTitle(className) {
+function createTitle(className, text) {
   const el = document.createElement('h2');
-  el.textContent = 'Содержание';
+  el.textContent = text;
   el.className = className;
   return el;
 }
@@ -58,8 +58,9 @@ export function ContentList() {
     h.el.insertAdjacentElement('afterbegin', createAnchor(h.id));
   });
 
-  const contentList = document.querySelector('.contentlist');
+  const contentList = document.querySelector('[data-contentlist]');
   if (contentList) {
+    contentList.classList.add('contentlist')
     const oneLevelList = contentList.hasAttribute('data-root');
 
     const list = headers.reduce((acc, h) => {
@@ -78,11 +79,14 @@ export function ContentList() {
       return acc;
     }, []);
 
-    const title = createTitle('contentlist__title');
-    contentList.appendChild(title);
-    title.addEventListener('click', function(e) {
-      contentList.classList.toggle('contentlist--closed');
-    });
+    if (contentList.hasAttribute('data-title')) {
+      const title = createTitle('contentlist__title', contentList.dataset.title);
+      contentList.appendChild(title);
+      title.addEventListener('click', function(e) {
+        contentList.classList.toggle('contentlist--closed');
+      });
+    }
+
 
     contentList.appendChild(createList(list, 'contentlist__root'));
     contentList.classList.add('contentlist--loaded');
