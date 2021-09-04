@@ -46,7 +46,9 @@
         <div class="h1 page-banner__title my-2"><?php the_title(); ?></div>
 
         <div class="page-banner__meta">
-          <span title="<?php the_time('j F Y, h:i') ?>"><?php the_time('j/m/Y'); ?></span>
+          <span title="<?php the_time('j F Y, h:i') ?>"><?php the_time('j.m.Y'); ?></span>
+          <br><br>
+          Последнее обновление: <span title="Последнее обновление: <?php the_modified_time('j F Y, h:i') ?>"><?php the_modified_time('j.m.Y'); ?></span>
         </div>
       </div>
     <?php endif; ?>
