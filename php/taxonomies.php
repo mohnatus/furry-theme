@@ -34,7 +34,6 @@ function furry_register_taxonomies() {
 		'capabilities'          => array(),
 		'meta_box_cb'           => 'post_categories_meta_box',
 		'show_admin_column'     => false, // авто-создание колонки таксы в таблице ассоциированного типа записи. (с версии 3.5)
-		'show_in_rest'          => null, // добавить в REST API
     'rest_base'             => null, // $taxonomy
     'sort'                  => true,
 		// '_builtin'              => false,

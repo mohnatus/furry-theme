@@ -1,6 +1,32 @@
 .contentlist {
   &.contentlist--loaded {
     margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    background: var(--service-color);
+
+    .contentlist__collapse {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--service-text-color);
+      cursor: pointer;
+      &:before {
+        content: attr(data-hide);
+      }
+    }
+
+    .contentlist__wrapper[data-collapsed] + .contentlist__collapse {
+      margin-top: 0;
+      &:before {
+        content: attr(data-show);
+      }
+    }
+
+    h2.contentlist__title {
+      margin-bottom: 0;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
 
     ul.contentlist__root {
       margin: 0;
@@ -9,6 +35,18 @@
         margin-top: 0.5em;
         margin-bottom: 0.5em;
         padding-left: 2em;
+      }
+    }
+
+    .contentlist__title + ul.contentlist__root {
+      margin-top: 1.5rem;
+    }
+
+    &.contentlist--collapsible {
+      .contentlist__wrapper {
+        height: 0px;
+        overflow: hidden;
+        transition: height 250ms linear;
       }
     }
   }

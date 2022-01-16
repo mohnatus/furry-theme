@@ -56,6 +56,16 @@ function createTitle(className, text) {
   return el;
 }
 
+function collapseBlock(el) {
+  if (el.hasAttribute('data-collapsed')) {
+    el.style.height = el.scrollHeight + 'px';
+    el.removeAttribute('data-collapsed');
+  } else {
+    el.style.height = '';
+    el.setAttribute('data-collapsed', true);
+  }
+}
+
 export function ContentList() {
   const headers = getHeaders();
   headers.forEach((h) => {
@@ -63,7 +73,19 @@ export function ContentList() {
   });
 
   const contentList = document.querySelector('[data-contentlist]');
+
   if (contentList) {
+    const titleText = contentList.hasAttribute('data-title')
+      ? contentList.getAttribute('data-title')
+      : 'Содержание';
+    const toggle = contentList.hasAttribute('data-toggle');
+    const hideText = contentList.hasAttribute('data-hide-text')
+      ? contentList.getAttribute('data-hide-text')
+      : 'Скрыть содержание';
+    const showText = contentList.hasAttribute('data-show-text')
+      ? contentList.getAttribute('data-show-text')
+      : 'Показать содержание';
+
     contentList.classList.add('contentlist');
     const oneLevelList = contentList.hasAttribute('data-root');
 
@@ -83,18 +105,40 @@ export function ContentList() {
       return acc;
     }, []);
 
-    if (contentList.hasAttribute('data-title')) {
-      const title = createTitle(
-        'contentlist__title',
-        contentList.dataset.title
-      );
-      contentList.appendChild(title);
-      title.addEventListener('click', function (e) {
-        contentList.classList.toggle('contentlist--closed');
+    const $list = createList(list, 'contentlist__root');
+
+    const $wrapper = document.createElement('div');
+    $wrapper.classList.add('contentlist__wrapper');
+    contentList.appendChild($wrapper);
+
+    if (titleText) {
+      const $title = createTitle('contentlist__title', titleText);
+      $wrapper.appendChild($title);
+
+      if (toggle) {
+        $title.addEventListener('click', function (e) {
+          collapseBlock($wrapper);
+        });
+      }
+    }
+
+    $wrapper.appendChild($list);
+
+    if (toggle) {
+      $wrapper.setAttribute('data-collapsed', true);
+
+      const $collapse = document.createElement('div');
+      $collapse.classList.add('contentlist__collapse');
+      $collapse.setAttribute('data-show', showText);
+      $collapse.setAttribute('data-hide', hideText);
+      contentList.append($collapse);
+      contentList.classList.add('contentlist--collapsible');
+
+      $collapse.addEventListener('click', function () {
+        collapseBlock($wrapper);
       });
     }
 
-    contentList.appendChild(createList(list, 'contentlist__root'));
     contentList.classList.add('contentlist--loaded');
   }
 }
