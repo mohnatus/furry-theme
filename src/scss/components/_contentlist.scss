@@ -3,6 +3,12 @@
     margin: 1.5rem 0;
     padding: 1rem 1.5rem;
     background: var(--service-color);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+    }
 
     .contentlist__collapse {
       text-align: right;
