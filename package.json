@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "css-reset": "0.0.1",
+    "highlight.js": "^11.4.0",
     "node-sass-import": "^2.0.1"
   }
 }
