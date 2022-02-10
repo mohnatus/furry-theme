@@ -28,7 +28,7 @@
   "devDependencies": {
     "csso": "^4.0.3",
     "csso-cli": "^3.0.0",
-    "node-sass": "^4.13.1"
+    "node-sass": "^7.0.0"
   },
   "dependencies": {
     "css-reset": "0.0.1",
